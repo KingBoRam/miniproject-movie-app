@@ -1,0 +1,22 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  height: 100%;
+  margin: 10px;
+  cursor: pointer;
+}
+.card-poster {
+  width: 180px;
+  height: 230px;
+}
+
+.card-title {
+  height: 30px;
+  align-self: flex-start;
+}
+
+.card-vote_average {
+  height: 30px;
+  align-self: self-end;
+}
