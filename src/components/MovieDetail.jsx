@@ -1,10 +1,17 @@
-import {useState} from "react";
-import movieDetailData from "../../data/movieDetailData.json";
+import {useEffect, useState} from "react";
 import "./MovieDetail.css";
+import {useParams} from "react-router-dom";
+import axios from "../api/axios";
 
 const MovieDetail = () => {
-  const [movieDetail, setMovieDetail] = useState(movieDetailData);
-  console.log(movieDetail);
+  const [movieDetail, setMovieDetail] = useState({});
+  const param = useParams();
+
+  // https://velog.io/@rgfdds98/debuging-React-Hook-useEffect-has-a-missing-dependency-fetchMovieData.-Either-include-it-or-remove-the-dependency-array
+  useEffect(() => {
+    axios.get(`/movie/${param.id}`).then((res) => setMovieDetail(res.data));
+  }, [param]);
+
   return (
     <div className="detail-container">
       <img
@@ -18,7 +25,7 @@ const MovieDetail = () => {
           </p>
         </div>
         <p className="detail-description__genres">
-          {movieDetail.genres.map((genre) => {
+          {movieDetail.genres?.map((genre) => {
             return (
               <span className="detail-description__genre" key={genre.id}>
                 {genre.name}
@@ -26,7 +33,7 @@ const MovieDetail = () => {
             );
           })}
         </p>
-        <p className="detail.description__overview">{movieDetail.overview}</p>
+        <p className="detail-description__overview">{movieDetail.overview}</p>
       </div>
     </div>
   );

@@ -3,9 +3,11 @@ import "./MovieCard.css";
 
 const MovieCard = (item) => {
   const navigate = useNavigate();
+
   const handleClick = () => {
-    navigate("/details");
+    navigate(`/${item.id}`);
   };
+
   return (
     <div className="card" onClick={handleClick}>
       <img
