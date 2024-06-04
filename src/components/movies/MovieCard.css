@@ -6,18 +6,39 @@
   flex-direction: column;
   cursor: pointer;
   flex: 16%;
+  transition: transform 0.2s linear;
 }
+
+.card:hover {
+  transform: scale(0.9);
+}
+
 .card-poster {
   width: 100%;
   height: 230px;
+  border-radius: 5px;
 }
 
 .card-title {
+  padding: 3px;
   height: 30px;
   align-self: flex-start;
+  overflow: hidden;
 }
 
 .card-vote_average {
   height: 30px;
+  padding-right: 3px;
+  padding-left: 3px;
   align-self: self-end;
+  color: rgba(26, 26, 26, 0.544);
+}
+
+.card-poster-2 {
+  display: flex;
+  justify-content: end;
+}
+
+.card-icon {
+  color: orange;
 }

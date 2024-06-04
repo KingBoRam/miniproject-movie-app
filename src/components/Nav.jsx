@@ -1,18 +1,20 @@
-import {SiThemoviedatabase} from "react-icons/si";
 import "./Nav.css";
 import {useNavigate} from "react-router-dom";
+import {MdLocalMovies} from "react-icons/md";
 
 const Nav = () => {
   const navigate = useNavigate();
 
   return (
     <div className="nav-container">
-      <SiThemoviedatabase
-        className="nav-logo"
+      <div
+        className="nav-logo-container"
         onClick={() => {
           navigate("/");
-        }}
-      />
+        }}>
+        <MdLocalMovies className="nav-logo" /> The movies
+      </div>
+
       <div className="nav-button-container">
         <button
           className="nav-button"

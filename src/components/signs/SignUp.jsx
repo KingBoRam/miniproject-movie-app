@@ -3,6 +3,7 @@ import "./SignUp.css";
 const SignUp = () => {
   return (
     <form className="signup-form">
+      <div className="signup-text">가입을 환영합니다.</div>
       <div className="signup-container">
         <label className="signup-label" htmlFor="name">
           이름 :
@@ -43,11 +44,10 @@ const SignUp = () => {
           name="email-comfirm"
           id="email-confirm"></input>
       </div>
-      <div className="signup-container">
-        <button className="signup-button" type="submit">
-          회 원 가 입
-        </button>
-      </div>
+
+      <button className="signup-button" type="submit">
+        회 원 가 입
+      </button>
     </form>
   );
 };
