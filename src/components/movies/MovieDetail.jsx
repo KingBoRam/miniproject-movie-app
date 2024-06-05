@@ -18,7 +18,13 @@ const MovieDetail = () => {
     <div className="detail-container">
       <img
         className="detail-poster"
-        src={`https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`}></img>
+        src={
+          movieDetail.backdrop_path === null ||
+          movieDetail.backdrop_path === "" ||
+          movieDetail.backdrop_path === undefined
+            ? "/images/blue.png"
+            : `https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`
+        }></img>
       <div className="detail-description">
         <h1 className="detail-description__title">{movieDetail.title}</h1>
         <p className="detail-description__vote-average">

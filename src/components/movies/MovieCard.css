@@ -1,11 +1,11 @@
 .card {
-  /* width: 180px; */
+  width: 180px;
   height: 100%;
   margin: 10px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  flex: 16%;
+  /* flex: 16%; */
   transition: transform 0.2s linear;
 }
 
@@ -41,4 +41,13 @@
 
 .card-icon {
   color: orange;
+}
+
+@media screen and (max-width: 1008px) {
+  .card {
+    width: 130px;
+  }
+  .card-poster {
+    height: 200px;
+  }
 }

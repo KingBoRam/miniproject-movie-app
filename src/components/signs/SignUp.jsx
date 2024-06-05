@@ -25,14 +25,14 @@ const SignUp = () => {
           id="email"></input>
       </div>
       <div className="signup-container">
-        <label
-          className="signup-label"
-          htmlFor="password"
-          name="password"
-          id="password">
+        <label className="signup-label" htmlFor="password">
           비밀번호 :
         </label>
-        <input className="signup-input" type="password"></input>
+        <input
+          className="signup-input"
+          id="password"
+          name="password"
+          type="password"></input>
       </div>
       <div className="signup-container">
         <label className="signup-label" htmlFor="email-confirm">

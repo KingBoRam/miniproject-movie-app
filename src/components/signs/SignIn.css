@@ -24,7 +24,7 @@
   flex-grow: 1;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid rgb(179, 179, 179);
+  border-bottom: 1px solid rgb(216, 216, 216);
   outline: none;
   margin-left: 5px;
 }
@@ -53,4 +53,19 @@
   font-size: 4rem;
   font-family: "HakgyoansimGaeulsopungB";
   margin-bottom: 70px;
+}
+
+@media screen and (max-width: 1008px) {
+  .signin-text {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  .signin-container {
+    width: 300px;
+  }
+  .signin-button {
+    width: 250px;
+    height: 40px;
+    font-size: 1rem;
+  }
 }

@@ -11,15 +11,22 @@ const MovieCard = (item) => {
 
   return (
     <div className="card" onClick={handleClick}>
+      {}
       <img
         className="card-poster"
-        src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+        src={
+          item.poster_path === null ||
+          item.poster_path === "" ||
+          item.poster_path === undefined
+            ? "/images/blue.png"
+            : `https://image.tmdb.org/t/p/original/${item.poster_path}`
+        }
         alt="poster"></img>
       <p className="card-title">{item.title}</p>
       <div className="card-poster-2">
         <GoStarFill className="card-icon" />
         <p className="card-vote_average">
-          {Math.round(item.vote_average * 10) / 10}
+          {(Math.round(item.vote_average * 10) / 10).toFixed(1)}
         </p>
       </div>
     </div>

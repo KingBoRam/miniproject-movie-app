@@ -9,3 +9,9 @@
   height: 100%;
   /* object-fit: contain; */
 }
+
+@media screen and (max-width: 1008px) {
+  .row-container {
+    height: 400px;
+  }
+}

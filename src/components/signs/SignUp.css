@@ -13,8 +13,6 @@
   width: 400px;
   height: 60px;
   margin: 5px;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,9 +24,10 @@
   flex-grow: 1;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid rgb(179, 179, 179);
+  border-bottom: 1px solid rgb(216, 216, 216);
   outline: none;
   margin-left: 5px;
+  font-size: 1rem;
 }
 
 .signup-button {
@@ -54,4 +53,19 @@
   margin-bottom: 70px;
   font-size: 4rem;
   font-family: "HakgyoansimGaeulsopungB";
+}
+
+@media screen and (max-width: 1008px) {
+  .signup-text {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  .signup-container {
+    width: 300px;
+  }
+  .signup-button {
+    width: 250px;
+    height: 40px;
+    font-size: 1rem;
+  }
 }

@@ -43,7 +43,9 @@ const Home = () => {
     <>
       <div className="container">
         <Row></Row>
-        <FaArrowAltCircleUp className="main-up-btn" onClick={handleClick} />
+        <div className="btn-container">
+          <FaArrowAltCircleUp className="main-up-btn" onClick={handleClick} />
+        </div>
         <div className="main-text">
           Popular Movies <GoTriangleDown />
         </div>

@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import SignIn from "./components/signs/SignIn";
 import SignUp from "./components/signs/SignUp";
 import Home from "./components/Home";
+import SearchResults from "./components/search/SearchResults";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/:id" element={<MovieDetail />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/search" element={<SearchResults />} />
       </Route>
     </Routes>
   );
