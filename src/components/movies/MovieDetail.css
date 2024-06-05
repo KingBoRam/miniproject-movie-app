@@ -13,6 +13,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  animation: moveRight 1s linear;
 }
 
 .detail-description {
@@ -23,6 +24,7 @@
   justify-content: center;
   align-items: flex-start;
   padding: 1rem;
+  animation: moveTop 1s linear;
 }
 
 .detail-description__title {
@@ -59,6 +61,28 @@
 .detail-icon {
   color: orange;
   margin-right: 2px;
+}
+
+@keyframes moveRight {
+  from {
+    opacity: 0;
+    transform: translate(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0%);
+  }
+}
+
+@keyframes moveTop {
+  from {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 }
 
 @media screen and (max-width: 1008px) {

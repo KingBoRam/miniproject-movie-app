@@ -32,6 +32,7 @@ const Row = () => {
     <div className="row-container">
       <Swiper
         effect={"coverflow"}
+        rewind={true}
         grabCursor={true}
         centeredSlides={true}
         slidesPerView={"auto"}
@@ -43,9 +44,12 @@ const Row = () => {
           scale: 1,
           slideShadows: true,
         }}
+        initialSlide={10}
         modules={[EffectCoverflow, Pagination, Navigation]}
         navigation
-        pagination={true}
+        pagination={{
+          dynamicBullets: true,
+        }}
         className="mySwiper">
         {topMovies.map((item) => (
           <SwiperSlide key={item.id}>

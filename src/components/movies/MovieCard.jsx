@@ -11,7 +11,6 @@ const MovieCard = (item) => {
 
   return (
     <div className="card" onClick={handleClick}>
-      {}
       <img
         className="card-poster"
         src={
@@ -22,7 +21,9 @@ const MovieCard = (item) => {
             : `https://image.tmdb.org/t/p/original/${item.poster_path}`
         }
         alt="poster"></img>
-      <p className="card-title">{item.title}</p>
+      <p className="card-title">
+        {item.title || item.original_name || item.original_title}
+      </p>
       <div className="card-poster-2">
         <GoStarFill className="card-icon" />
         <p className="card-vote_average">

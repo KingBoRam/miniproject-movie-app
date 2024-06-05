@@ -7,3 +7,10 @@
   justify-content: center;
   align-items: center;
 }
+.search-noresult {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+}

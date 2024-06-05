@@ -53,6 +53,7 @@
   font-size: 4rem;
   font-family: "HakgyoansimGaeulsopungB";
   margin-bottom: 70px;
+  animation: moveBottom 1s linear;
 }
 
 @media screen and (max-width: 1008px) {
@@ -67,5 +68,16 @@
     width: 250px;
     height: 40px;
     font-size: 1rem;
+  }
+}
+
+@keyframes moveBottom {
+  from {
+    opacity: 0;
+    transform: translateY(-30%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

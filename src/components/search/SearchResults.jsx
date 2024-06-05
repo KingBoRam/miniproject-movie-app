@@ -10,12 +10,9 @@ const SearchResults = () => {
 
   const navigate = useNavigate();
 
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  };
-  let query = useQuery();
+  let query = new URLSearchParams(useLocation().search);
   const searchTerm = query.get(`q`);
-  const deBouncedSearchTerm = useDebounce(searchTerm, 500);
+  const deBouncedSearchTerm = useDebounce(searchTerm, 700);
 
   useEffect(() => {
     if (deBouncedSearchTerm !== "" && deBouncedSearchTerm !== null) {
@@ -40,9 +37,13 @@ const SearchResults = () => {
 
   return (
     <div className="search-container">
-      {movieList.map((item) => (
-        <MovieCard className="search-card" key={item.id} {...item} />
-      ))}
+      {movieList.length === 0 ? (
+        <div className="search-noresult">검색 결과가 없습니다.</div>
+      ) : (
+        movieList.map((item) => (
+          <MovieCard className="search-card" key={item.id} {...item} />
+        ))
+      )}
     </div>
   );
 };
