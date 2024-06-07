@@ -1,11 +1,11 @@
 import "./App.css";
 import {Outlet, Route, Routes} from "react-router-dom";
 import MovieDetail from "./components/movies/MovieDetail";
-import Nav from "./components/Nav";
-import SignIn from "./components/signs/SignIn";
-import SignUp from "./components/signs/SignUp";
-import Home from "./components/Home";
-import SearchResults from "./components/search/SearchResults";
+import Nav from "./components/common/Nav";
+import SignIn from "./components/pages/SignIn";
+import SignUp from "./components/pages/SignUp";
+import Home from "./components/pages/Home";
+import SearchResults from "./components/pages/SearchResults";
 
 function App() {
   return (

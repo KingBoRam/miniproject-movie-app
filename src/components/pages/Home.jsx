@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useState} from "react";
-import MovieCard from "./movies/MovieCard";
-import axios from "../api/axios";
-import Row from "./Row";
+import MovieCard from "../movies/MovieCard";
+import axios from "../../api/axios";
+import Row from "../common/Row";
 import {FaArrowAltCircleUp} from "react-icons/fa";
 import {GoTriangleDown} from "react-icons/go";
 

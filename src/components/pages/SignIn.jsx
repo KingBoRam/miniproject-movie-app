@@ -6,19 +6,22 @@ import {
 } from "firebase/auth";
 import app from "../../firebase";
 import {useEffect, useRef, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {FcGoogle} from "react-icons/fc";
+import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import {validateEmail} from "../utils/validateEmail";
 
 const SignIn = () => {
   const [input, setInput] = useState("");
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
+  const {pathname} = useLocation();
   const auth = getAuth(app);
 
   const handleSignin = (e) => {
     e.preventDefault();
-    const email = emailRef.current.value;
+    const email = validateEmail(emailRef.current.value);
     const password = passwordRef.current.value;
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -36,21 +39,42 @@ const SignIn = () => {
           setInput("⚠️ 이메일 혹은 비밀번호가 틀렸습니다.");
         } else if (errorCode.includes("invalid-email")) {
           setInput("⚠️ 이메일을 제대로 입력해주세요.");
+        } else if (email === null) {
+          setInput("⚠️ 이메일 형식을 확인해주세요.");
         }
       });
   };
 
   const handleGoogleSignin = (e) => {
     e.preventDefault();
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+        console.log(user, token);
+      })
+      .catch((error) => {
+        if (error.length > 0) {
+          setInput("⚠️ 구글을 통한 로그인에 실패했습니다.");
+        }
+      });
   };
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigate("/");
+        if (pathname === "/signin") {
+          navigate("/");
+        }
       }
     });
-  }, [auth, navigate]);
+  }, [auth, navigate, pathname]);
 
   return (
     <form className="signin-form" onSubmit={handleSignin}>

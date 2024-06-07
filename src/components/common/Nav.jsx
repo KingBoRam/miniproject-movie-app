@@ -1,13 +1,16 @@
 import "./Nav.css";
 import {useNavigate} from "react-router-dom";
 import {MdLocalMovies} from "react-icons/md";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
-import app from "../firebase";
+import app from "../../firebase";
+import {LuUser2} from "react-icons/lu";
 
 const Nav = () => {
   const [value, setValue] = useState("");
-  const [loginState, setLoginState] = useState(false);
+  const [user, setUser] = useState("");
+
+  const [loginState, setLoginState] = useState("");
   const navigate = useNavigate();
 
   const handleChange = async (e) => {
@@ -16,19 +19,15 @@ const Nav = () => {
   };
 
   const auth = getAuth(app);
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      // const uid = user.uid;
-      console.log(user);
-      setLoginState(true);
-      // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        setLoginState(true);
+        setUser(user);
+      }
+    });
+  }, [auth]);
 
   const handleSignout = () => {
     signOut(auth)
@@ -62,14 +61,30 @@ const Nav = () => {
       </div>
       <div className="nav-button-container">
         {loginState ? (
-          <>
-            <button className="nav-button" onClick={handleSignout}>
-              로그아웃
-            </button>
-          </>
+          <div className="nav-user">
+            <p className="nav-user-name">{user.displayName || user.email}님</p>
+            {user.photoURL !== null ? (
+              <img
+                src={user.photoURL}
+                alt="user img"
+                className="nav-user-image"
+              />
+            ) : (
+              <div className="ha">
+                <LuUser2 className="ha-ha" />
+              </div>
+            )}
+            <div className="dropOut">
+              <button className="nav-button-dropout" onClick={handleSignout}>
+                로그아웃
+              </button>
+              <button className="nav-button-dropout" onClick={handleSignout}>
+                마이페이지
+              </button>
+            </div>
+          </div>
         ) : (
           <>
-            {" "}
             <button
               className="nav-button"
               onClick={() => {

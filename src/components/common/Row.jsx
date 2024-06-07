@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import "./Row.css";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 // import Swiper core and required modules
 import {Swiper, SwiperSlide} from "swiper/react";
 

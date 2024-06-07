@@ -6,7 +6,8 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import {validateEmail} from "../utils/validateEmail";
 
 const SignUp = () => {
   const [input, setInput] = useState("");
@@ -15,16 +16,16 @@ const SignUp = () => {
   const passwordRef = useRef(null);
   const confirmpasswordRef = useRef(null);
   const auth = getAuth(app);
+  const {pathname} = useLocation();
   const navigate = useNavigate();
 
   const handleSignup = (e) => {
     e.preventDefault();
-
-    const email = emailRef.current?.value;
+    const email = validateEmail(emailRef.current?.value);
     const password = passwordRef.current?.value;
     const confirmPassword = confirmpasswordRef.current?.value;
-
-    if (password?.trim() === confirmPassword?.trim()) {
+    const comparison = password?.trim() === confirmPassword?.trim();
+    if (comparison) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -38,7 +39,9 @@ const SignUp = () => {
             setInput("⚠️ 이미 존재하는 이메일입니다.");
           }
         });
-    } else {
+    } else if (email === null) {
+      setInput("⚠️ 이메일 형식을 확인해주세요.");
+    } else if (!comparison) {
       setInput("⚠️ 입력하신 두개의 비밀번호가 일치하지 않습니다.");
     }
   };
@@ -46,10 +49,12 @@ const SignUp = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        navigate("/");
+        if (pathname === "/signup") {
+          navigate("/");
+        }
       }
     });
-  }, [auth, navigate]);
+  }, [auth, navigate, pathname]);
 
   return (
     <form className="signup-form" onSubmit={handleSignup}>
