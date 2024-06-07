@@ -1,3 +1,6 @@
+.env
+firebase.jsx
+
 # Logs
 logs
 *.log
@@ -22,5 +25,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.env
-firebase.jsx
+
