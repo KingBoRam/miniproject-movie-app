@@ -109,7 +109,7 @@
 }
 
 .dropOut {
-  display: none;
+  /* display: none; */
   background-color: #e03131;
   position: absolute;
   width: 110px;
@@ -120,6 +120,7 @@
   z-index: 99;
   border-radius: 5px;
   color: white;
+  opacity: 0;
 }
 
 .dropOut::before {
@@ -141,7 +142,8 @@
 }
 
 .nav-user:hover .dropOut {
-  display: block;
+  opacity: 1;
+  transition: all 0.5s linear;
 }
 
 .nav-button-dropout {

@@ -3,19 +3,55 @@ import "./MovieDetail.css";
 import {useParams} from "react-router-dom";
 import axios from "../../api/axios";
 import {GoStarFill} from "react-icons/go";
+import {BsFillBookmarkStarFill} from "react-icons/bs";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
+import {useDispatch, useSelector} from "react-redux";
+import {addbookmark, deletebookmark} from "../store/bookmarkSlice";
 
 const MovieDetail = () => {
   const [movieDetail, setMovieDetail] = useState({});
-  console.log(movieDetail);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const bookmark = useSelector((state) => {
+    return state.bookmark;
+  });
+  const dispatch = useDispatch();
   const param = useParams();
+  console.log(bookmark);
 
   // https://velog.io/@rgfdds98/debuging-React-Hook-useEffect-has-a-missing-dependency-fetchMovieData.-Either-include-it-or-remove-the-dependency-array
   useEffect(() => {
     axios.get(`/movie/${param.id}`).then((res) => setMovieDetail(res.data));
   }, [param]);
 
+  const handleBookmarkClick = () => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        alert("로그인이 필요한 기능입니다.");
+      } else {
+        setIsBookmarked(!isBookmarked);
+        if (isBookmarked === true) {
+          dispatch(deletebookmark(param.id));
+        } else {
+          dispatch(addbookmark(param.id));
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (bookmark.includes(param.id)) {
+      setIsBookmarked(true);
+    }
+  }, [bookmark, param]);
+
   return (
     <div className="detail-container">
+      <BsFillBookmarkStarFill
+        className="bookmark"
+        style={{color: isBookmarked ? "#e03131" : "black"}}
+        onClick={handleBookmarkClick}
+      />
       <img
         className="detail-poster"
         src={

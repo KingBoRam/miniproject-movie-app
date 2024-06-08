@@ -9,7 +9,7 @@ import {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {FcGoogle} from "react-icons/fc";
 import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
-import {validateEmail} from "../utils/validateEmail";
+import {validateEmail} from "../../utils/validateEmail";
 
 const SignIn = () => {
   const [input, setInput] = useState("");

@@ -4,6 +4,7 @@ import axios from "../../api/axios";
 import Row from "../common/Row";
 import {FaArrowAltCircleUp} from "react-icons/fa";
 import {GoTriangleDown} from "react-icons/go";
+import "./Home.css";
 
 const Home = () => {
   const [movieList, setMovieList] = useState([]);

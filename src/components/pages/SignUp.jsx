@@ -7,7 +7,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import {useLocation, useNavigate} from "react-router-dom";
-import {validateEmail} from "../utils/validateEmail";
+import {validateEmail} from "../../utils/validateEmail";
 
 const SignUp = () => {
   const [input, setInput] = useState("");

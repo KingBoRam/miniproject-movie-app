@@ -1,0 +1,52 @@
+.mypage-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  padding: 5rem;
+  border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.mypage-container {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+.mypage-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%; /* 원형 이미지 */
+  margin-bottom: 20px;
+}
+
+.mypage-name {
+  padding: 1rem;
+}
+
+.mypage-email {
+  padding: 1rem;
+}
+
+.mypage-bookmark {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.mypage-bookmark-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1008px) {
+  .mypage-img {
+    width: 100px;
+    height: 100px;
+  }
+  .mypage-container {
+    gap: 2rem;
+  }
+}

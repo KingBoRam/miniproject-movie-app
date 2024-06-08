@@ -22,7 +22,6 @@ const Nav = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
         setLoginState(true);
         setUser(user);
       }
@@ -78,7 +77,11 @@ const Nav = () => {
               <button className="nav-button-dropout" onClick={handleSignout}>
                 로그아웃
               </button>
-              <button className="nav-button-dropout" onClick={handleSignout}>
+              <button
+                className="nav-button-dropout"
+                onClick={() => {
+                  navigate("/mypage");
+                }}>
                 마이페이지
               </button>
             </div>

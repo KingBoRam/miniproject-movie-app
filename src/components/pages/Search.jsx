@@ -1,11 +1,11 @@
-import "./SearchResults.css";
+import "./Search.css";
 import axios from "../../api/axios";
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import MovieCard from "../movies/MovieCard";
-import {useDebounce} from "../hooks/useDebounce";
+import {useDebounce} from "../../hooks/useDebounce";
 
-const SearchResults = () => {
+const Search = () => {
   const [movieList, setMovieList] = useState([]);
 
   const navigate = useNavigate();
@@ -48,4 +48,4 @@ const SearchResults = () => {
   );
 };
 
-export default SearchResults;
+export default Search;
