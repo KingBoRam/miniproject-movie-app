@@ -24,6 +24,7 @@
 
 .mypage-name {
   padding: 1rem;
+  padding-left: 10px;
 }
 
 .mypage-email {
@@ -49,4 +50,32 @@
   .mypage-container {
     gap: 2rem;
   }
+}
+
+.mypage-edit-btn {
+  border: none;
+  background-color: transparent;
+  color: rgb(225, 0, 0);
+  cursor: pointer;
+}
+
+.name-container {
+  display: flex;
+  position: relative;
+}
+
+.edit-name {
+  position: absolute;
+  top: 30px;
+  left: 80px;
+}
+
+.edit-input {
+  border: none;
+  border-bottom: 1px solid rgb(183, 183, 183);
+  margin-left: 13px;
+}
+
+.profile-edit-btn {
+  padding-left: 15px;
 }

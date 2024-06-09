@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import "./MyPage.css";
-import {getAuth, onAuthStateChanged} from "firebase/auth";
+import {getAuth, onAuthStateChanged, updateProfile} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import MovieCard from "../movies/MovieCard";
 import {useSelector} from "react-redux";
@@ -19,6 +19,7 @@ const MyPage = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log(user);
         setName(user.displayName || user.email);
         setPhoto(user.photoURL || "./images/blue.png");
         setEmail(user.email);
@@ -40,14 +41,103 @@ const MyPage = () => {
     }
   }, [bookmark]);
 
+  const [edit, setEdit] = useState(false);
+
+  const handleEdit = () => {
+    updateProfile(auth.currentUser, {
+      displayName: name,
+    })
+      .then(() => {
+        setEdit(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const [editImg, setEditImg] = useState(false);
+
+  const handleEditImg = () => {
+    updateProfile(auth.currentUser, {
+      photoURL: photo,
+    })
+      .then(() => {
+        setEditImg(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <div className="mypage-content">
         <div className="mypage-container">
           <img src={photo} alt="User Profile" className="mypage-img" />
           <div className="mypage-description">
-            <h1 className="mypage-name">{name}</h1>
+            {edit === false ? (
+              <div className="name-container">
+                <h1 className="mypage-name">{name}</h1>{" "}
+                <button
+                  className="mypage-edit-btn edit-name"
+                  onClick={() => {
+                    setEdit((prev) => !prev);
+                  }}>
+                  수정
+                </button>
+              </div>
+            ) : (
+              <>
+                <input
+                  className="edit-input"
+                  type="text"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}></input>
+                <button className="mypage-edit-btn" onClick={handleEdit}>
+                  완료
+                </button>
+                <button
+                  className="mypage-edit-btn"
+                  onClick={() => {
+                    setEdit(false);
+                  }}>
+                  취소
+                </button>
+              </>
+            )}
+
             <p className="mypage-email">{email}</p>
+
+            {editImg ? (
+              <>
+                <input
+                  className="edit-input"
+                  type="text"
+                  onChange={(e) => {
+                    setPhoto(e.target.value);
+                  }}></input>
+                <button className="mypage-edit-btn" onClick={handleEditImg}>
+                  완료
+                </button>
+                <button
+                  className="mypage-edit-btn"
+                  onClick={() => {
+                    setEditImg(false);
+                  }}>
+                  취소
+                </button>
+              </>
+            ) : (
+              <button
+                className="mypage-edit-btn profile-edit-btn"
+                onClick={() => {
+                  setEditImg(true);
+                }}>
+                프로필 이미지 수정
+              </button>
+            )}
           </div>
         </div>
       </div>

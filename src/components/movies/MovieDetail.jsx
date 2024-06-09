@@ -16,7 +16,6 @@ const MovieDetail = () => {
   });
   const dispatch = useDispatch();
   const param = useParams();
-  console.log(bookmark);
 
   // https://velog.io/@rgfdds98/debuging-React-Hook-useEffect-has-a-missing-dependency-fetchMovieData.-Either-include-it-or-remove-the-dependency-array
   useEffect(() => {

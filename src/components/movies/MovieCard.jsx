@@ -18,7 +18,7 @@ const MovieCard = (item) => {
           item.poster_path === "" ||
           item.poster_path === undefined
             ? "/images/blue.png"
-            : `https://image.tmdb.org/t/p/original/${item.poster_path}`
+            : `https://image.tmdb.org/t/p/w200/${item.poster_path}`
         }
         alt="poster"></img>
       <p className="card-title">

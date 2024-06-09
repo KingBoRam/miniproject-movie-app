@@ -70,6 +70,7 @@
   top: 20px;
   z-index: 1000;
   cursor: pointer;
+  animation: moveLeft 1s linear;
 }
 
 @keyframes moveRight {
@@ -91,6 +92,17 @@
   to {
     opacity: 1;
     transform: translateY(0%);
+  }
+}
+
+@keyframes moveLeft {
+  from {
+    opacity: 0;
+    transform: translate(10%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0%);
   }
 }
 
