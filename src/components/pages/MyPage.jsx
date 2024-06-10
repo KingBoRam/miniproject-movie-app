@@ -3,8 +3,9 @@ import "./MyPage.css";
 import {getAuth, onAuthStateChanged, updateProfile} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import MovieCard from "../movies/MovieCard";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "../../api/axios";
+import {setUserName} from "../store/userNameSlice";
 
 const MyPage = () => {
   const [name, setName] = useState(null);
@@ -13,21 +14,26 @@ const MyPage = () => {
   const bookmark = useSelector((state) => {
     return state.bookmark;
   });
+  const userName = useSelector((state) => {
+    return state.userName;
+  });
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = getAuth();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
+        const asd = user.displayName || user.email;
         setName(user.displayName || user.email);
         setPhoto(user.photoURL || "./images/blue.png");
         setEmail(user.email);
+        dispatch(setUserName(asd));
       } else {
         navigate("/signin");
       }
     });
-  }, [auth, navigate]);
+  }, [auth, navigate, dispatch]);
 
   const [movieList, setMovieList] = useState([]);
 
@@ -49,6 +55,7 @@ const MyPage = () => {
     })
       .then(() => {
         setEdit(false);
+        dispatch(setUserName(auth.currentUser.displayName));
       })
       .catch((error) => {
         console.log(error);
@@ -77,9 +84,9 @@ const MyPage = () => {
           <div className="mypage-description">
             {edit === false ? (
               <div className="name-container">
-                <h1 className="mypage-name">{name}</h1>{" "}
+                <h1 className="mypage-name">{userName}</h1>{" "}
                 <button
-                  className="mypage-edit-btn edit-name"
+                  className="mypage-edit-btn"
                   onClick={() => {
                     setEdit((prev) => !prev);
                   }}>
@@ -113,6 +120,7 @@ const MyPage = () => {
             {editImg ? (
               <>
                 <input
+                  placeholder="이미지 url을 입력해주세요."
                   className="edit-input"
                   type="text"
                   onChange={(e) => {

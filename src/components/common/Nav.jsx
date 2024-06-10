@@ -5,11 +5,14 @@ import {useEffect, useState} from "react";
 import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
 import app from "../../firebase";
 import {LuUser2} from "react-icons/lu";
+import {useSelector} from "react-redux";
 
 const Nav = () => {
   const [value, setValue] = useState("");
   const [user, setUser] = useState("");
-
+  const userName = useSelector((state) => {
+    return state.userName;
+  });
   const [loginState, setLoginState] = useState("");
   const navigate = useNavigate();
 
@@ -24,6 +27,7 @@ const Nav = () => {
       if (user) {
         setLoginState(true);
         setUser(user);
+        console.log(user);
       }
     });
   }, [auth]);
@@ -32,6 +36,7 @@ const Nav = () => {
     signOut(auth)
       .then(() => {
         setLoginState(false);
+        window.location.replace("/");
       })
       .catch((error) => {
         console.log(error);
@@ -44,7 +49,8 @@ const Nav = () => {
       <div
         className="nav-logo-container"
         onClick={() => {
-          window.location.replace("/");
+          // window.location.replace("/");
+          navigate("/");
         }}>
         <MdLocalMovies className="nav-logo" />{" "}
         <div className="nav-logo-text">The movies</div>
@@ -61,7 +67,7 @@ const Nav = () => {
       <div className="nav-button-container">
         {loginState ? (
           <div className="nav-user">
-            <p className="nav-user-name">{user.displayName || user.email}님</p>
+            <p className="nav-user-name">{userName}님</p>
             {user.photoURL !== null ? (
               <img
                 src={user.photoURL}
