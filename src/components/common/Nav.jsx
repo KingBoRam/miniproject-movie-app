@@ -61,7 +61,7 @@ const Nav = () => {
       <div className="nav-search-container">
         <input
           type="text"
-          placeholder=" 찾고 싶은 영화를 검색해주세요."
+          placeholder=" 찾고 싶은 영화를 검색해주세요❣️"
           className="nav-search-input"
           value={value}
           onChange={(e) => handleChange(e)}
