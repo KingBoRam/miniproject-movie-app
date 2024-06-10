@@ -5,7 +5,8 @@ import {useEffect, useState} from "react";
 import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
 import app from "../../firebase";
 import {LuUser2} from "react-icons/lu";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setUserName} from "../store/userNameSlice";
 
 const Nav = () => {
   const [value, setValue] = useState("");
@@ -13,6 +14,7 @@ const Nav = () => {
   const userName = useSelector((state) => {
     return state.userName;
   });
+  const dispatch = useDispatch();
   const [loginState, setLoginState] = useState("");
   const navigate = useNavigate();
 
@@ -23,14 +25,15 @@ const Nav = () => {
 
   const auth = getAuth(app);
   useEffect(() => {
+    const asd = user.displayName || user.email;
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setLoginState(true);
         setUser(user);
-        console.log(user);
+        dispatch(setUserName(asd));
       }
     });
-  }, [auth]);
+  }, [auth, dispatch, user]);
 
   const handleSignout = () => {
     signOut(auth)

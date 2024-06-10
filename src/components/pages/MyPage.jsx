@@ -114,9 +114,7 @@ const MyPage = () => {
                 </button>
               </>
             )}
-
             <p className="mypage-email">{email}</p>
-
             {editImg ? (
               <>
                 <input

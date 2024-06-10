@@ -25,7 +25,11 @@ const SignUp = () => {
     const password = passwordRef.current?.value;
     const confirmPassword = confirmpasswordRef.current?.value;
     const comparison = password?.trim() === confirmPassword?.trim();
-    if (comparison) {
+    if (email === null) {
+      setInput("⚠️ 이메일 형식을 확인해주세요.");
+    } else if (!comparison) {
+      setInput("⚠️ 입력하신 두개의 비밀번호가 일치하지 않습니다.");
+    } else if (comparison) {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
@@ -39,10 +43,6 @@ const SignUp = () => {
             setInput("⚠️ 이미 존재하는 이메일입니다.");
           }
         });
-    } else if (email === null) {
-      setInput("⚠️ 이메일 형식을 확인해주세요.");
-    } else if (!comparison) {
-      setInput("⚠️ 입력하신 두개의 비밀번호가 일치하지 않습니다.");
     }
   };
 
