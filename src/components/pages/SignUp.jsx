@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import "./SignUp.css";
-import app from "../../firebase";
+import app from "../../../firebase";
 import {
   getAuth,
   createUserWithEmailAndPassword,

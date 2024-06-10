@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {MdLocalMovies} from "react-icons/md";
 import {useEffect, useState} from "react";
 import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
-import app from "../../firebase";
+import app from "../../../firebase";
 import {LuUser2} from "react-icons/lu";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserName} from "../store/userNameSlice";
@@ -25,15 +25,15 @@ const Nav = () => {
 
   const auth = getAuth(app);
   useEffect(() => {
-    const asd = user.displayName || user.email;
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setLoginState(true);
         setUser(user);
+        const asd = user.displayName || user.email;
         dispatch(setUserName(asd));
       }
     });
-  }, [auth, dispatch, user]);
+  }, [auth, dispatch]);
 
   const handleSignout = () => {
     signOut(auth)
