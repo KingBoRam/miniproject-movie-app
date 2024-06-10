@@ -18,3 +18,7 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_THEMOVIES_A075B }}
           channelId: live
           projectId: themovies-a075b
+        env:
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+          VITE_ACCESS_TOKEN: ${{ secrets.VITE_ACCESS_TOKEN }}
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
