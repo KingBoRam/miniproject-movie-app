@@ -1,16 +1,19 @@
 import {useEffect, useState} from "react";
 import "./MyPage.css";
-import {getAuth, onAuthStateChanged, updateProfile} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import MovieCard from "../movies/MovieCard";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "../../api/axios";
 import {setUserName} from "../store/userNameSlice";
+import {getUserInfo, updateUserProfile} from "../../../firebase";
 
 const MyPage = () => {
   const [name, setName] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [email, setEmail] = useState(null);
+  const [movieList, setMovieList] = useState([]);
+  const [edit, setEdit] = useState(false);
+  const [editImg, setEditImg] = useState(false);
   const bookmark = useSelector((state) => {
     return state.bookmark;
   });
@@ -19,10 +22,9 @@ const MyPage = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const auth = getAuth();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    getUserInfo((user) => {
       if (user) {
         const asd = user.displayName || user.email;
         setName(user.displayName || user.email);
@@ -33,9 +35,7 @@ const MyPage = () => {
         navigate("/signin");
       }
     });
-  }, [auth, navigate, dispatch]);
-
-  const [movieList, setMovieList] = useState([]);
+  }, [navigate, dispatch]);
 
   useEffect(() => {
     if (bookmark.length > 0) {
@@ -47,25 +47,21 @@ const MyPage = () => {
     }
   }, [bookmark]);
 
-  const [edit, setEdit] = useState(false);
-
   const handleEdit = () => {
-    updateProfile(auth.currentUser, {
+    updateUserProfile({
       displayName: name,
     })
       .then(() => {
         setEdit(false);
-        dispatch(setUserName(auth.currentUser.displayName));
+        dispatch(setUserName(name));
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const [editImg, setEditImg] = useState(false);
-
   const handleEditImg = () => {
-    updateProfile(auth.currentUser, {
+    updateUserProfile({
       photoURL: photo,
     })
       .then(() => {

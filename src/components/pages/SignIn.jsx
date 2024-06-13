@@ -1,14 +1,8 @@
 import "./SignIn.css";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
-import app from "../../../firebase";
+import {emailSignIn, getUserInfo, googleSignIn} from "../../../firebase";
 import {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {FcGoogle} from "react-icons/fc";
-import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import {validateEmail} from "../../utils/validateEmail";
 
 const SignIn = () => {
@@ -17,24 +11,17 @@ const SignIn = () => {
   const passwordRef = useRef(null);
   const navigate = useNavigate();
   const {pathname} = useLocation();
-  const auth = getAuth(app);
 
   const handleSignin = (e) => {
     e.preventDefault();
     const email = validateEmail(emailRef.current.value);
     const password = passwordRef.current.value;
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
+    emailSignIn(email, password)
+      .then(() => {
         navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
         if (errorCode.includes("invalid-credential")) {
           setInput("⚠️ 이메일 혹은 비밀번호가 틀렸습니다.");
         } else if (errorCode.includes("invalid-email")) {
@@ -47,34 +34,22 @@ const SignIn = () => {
 
   const handleGoogleSignin = (e) => {
     e.preventDefault();
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-        console.log(user, token);
-      })
-      .catch((error) => {
-        if (error.length > 0) {
-          setInput("⚠️ 구글을 통한 로그인에 실패했습니다.");
-        }
-      });
+    googleSignIn().catch((error) => {
+      if (error.length > 0) {
+        setInput("⚠️ 구글을 통한 로그인에 실패했습니다.");
+      }
+    });
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    getUserInfo((user) => {
       if (user) {
         if (pathname === "/signin") {
           navigate("/");
         }
       }
     });
-  }, [auth, navigate, pathname]);
+  }, [navigate, pathname]);
 
   return (
     <form className="signin-form" onSubmit={handleSignin}>

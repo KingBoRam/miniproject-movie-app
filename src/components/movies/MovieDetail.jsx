@@ -4,9 +4,9 @@ import {useParams} from "react-router-dom";
 import axios from "../../api/axios";
 import {GoStarFill} from "react-icons/go";
 import {BsFillBookmarkStarFill} from "react-icons/bs";
-import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {addbookmark, deletebookmark} from "../store/bookmarkSlice";
+import {getUserInfo} from "../../../firebase";
 
 const MovieDetail = () => {
   const [movieDetail, setMovieDetail] = useState({});
@@ -23,8 +23,7 @@ const MovieDetail = () => {
   }, [param]);
 
   const handleBookmarkClick = () => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
+    getUserInfo((user) => {
       if (!user) {
         alert("로그인이 필요한 기능입니다.");
       } else {

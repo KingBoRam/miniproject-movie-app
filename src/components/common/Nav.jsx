@@ -2,11 +2,10 @@ import "./Nav.css";
 import {useNavigate} from "react-router-dom";
 import {MdLocalMovies} from "react-icons/md";
 import {useEffect, useState} from "react";
-import {getAuth, onAuthStateChanged, signOut} from "firebase/auth";
-import app from "../../../firebase";
 import {LuUser2} from "react-icons/lu";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserName} from "../store/userNameSlice";
+import {getUserInfo, userSignOut} from "../../../firebase";
 
 const Nav = () => {
   const [value, setValue] = useState("");
@@ -23,9 +22,8 @@ const Nav = () => {
     navigate(`/search?q=${e.target.value}`);
   };
 
-  const auth = getAuth(app);
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    getUserInfo((user) => {
       if (user) {
         setLoginState(true);
         setUser(user);
@@ -33,18 +31,10 @@ const Nav = () => {
         dispatch(setUserName(asd));
       }
     });
-  }, [auth, dispatch]);
+  }, [dispatch]);
 
   const handleSignout = () => {
-    signOut(auth)
-      .then(() => {
-        setLoginState(false);
-        window.location.replace("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("로그아웃에 실패했습니다...");
-      });
+    userSignOut();
   };
 
   return (

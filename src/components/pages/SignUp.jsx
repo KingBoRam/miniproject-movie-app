@@ -1,11 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import "./SignUp.css";
-import app from "../../../firebase";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
+import {emailSignUp, getUserInfo} from "../../../firebase";
 import {useLocation, useNavigate} from "react-router-dom";
 import {validateEmail} from "../../utils/validateEmail";
 
@@ -15,7 +10,7 @@ const SignUp = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmpasswordRef = useRef(null);
-  const auth = getAuth(app);
+
   const {pathname} = useLocation();
   const navigate = useNavigate();
 
@@ -30,15 +25,11 @@ const SignUp = () => {
     } else if (!comparison) {
       setInput("⚠️ 입력하신 두개의 비밀번호가 일치하지 않습니다.");
     } else if (comparison) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
+      emailSignUp(email, password)
+        .then(() => {
           navigate("/signin");
         })
         .catch((error) => {
-          console.error(error.code);
-          console.error(error.message);
           if (error.code.includes("email-already-in-use")) {
             setInput("⚠️ 이미 존재하는 이메일입니다.");
           }
@@ -47,14 +38,14 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    getUserInfo((user) => {
       if (user) {
         if (pathname === "/signup") {
           navigate("/");
         }
       }
     });
-  }, [auth, navigate, pathname]);
+  }, [navigate, pathname]);
 
   return (
     <form className="signup-form" onSubmit={handleSignup}>
