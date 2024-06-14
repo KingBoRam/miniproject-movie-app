@@ -14,6 +14,7 @@ const MyPage = () => {
   const [movieList, setMovieList] = useState([]);
   const [edit, setEdit] = useState(false);
   const [editImg, setEditImg] = useState(false);
+  const [uid, setUid] = useState(null);
   const bookmark = useSelector((state) => {
     return state.bookmark;
   });
@@ -30,6 +31,7 @@ const MyPage = () => {
         setName(user.displayName || user.email);
         setPhoto(user.photoURL || "./images/blue.png");
         setEmail(user.email);
+        setUid(user.uid);
         dispatch(setUserName(asd));
       } else {
         navigate("/signin");
@@ -39,13 +41,15 @@ const MyPage = () => {
 
   useEffect(() => {
     if (bookmark.length > 0) {
-      bookmark.forEach((item) => {
+      const user = bookmark.find((item) => item.uid === uid);
+      const userBookmark = user?.bookmark;
+      userBookmark?.forEach((item) => {
         axios.get(`/movie/${item}`).then((res) => {
           setMovieList((prev) => [...prev, res.data]);
         });
       });
     }
-  }, [bookmark]);
+  }, [bookmark, uid]);
 
   const handleEdit = () => {
     updateUserProfile({

@@ -13,8 +13,10 @@ const bookmarkSlice = createSlice({
       obj.bookmark.push(paramId);
     },
     deletebookmark: (state, action) => {
-      return state.filter((item) => {
-        return item !== action.payload;
+      const {uid, paramId} = action.payload;
+      const obj = state.find((item) => item.uid === uid);
+      obj.bookmark = obj.bookmark.filter((item) => {
+        return item !== paramId;
       });
     },
   },
@@ -23,3 +25,5 @@ const bookmarkSlice = createSlice({
 export const {addUser, addbookmark, deletebookmark} = bookmarkSlice.actions;
 
 export const bookmarkReducer = bookmarkSlice.reducer;
+
+// 참조자료형인 obj를 수정하면 같은 값을 참조하고있는 state도 변경되게 된다.

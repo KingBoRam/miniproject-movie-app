@@ -15,7 +15,6 @@ const MovieDetail = () => {
   const bookmark = useSelector((state) => {
     return state.bookmark;
   });
-  console.log(bookmark);
   const dispatch = useDispatch();
   const param = useParams();
 
@@ -37,7 +36,8 @@ const MovieDetail = () => {
       } else {
         setIsBookmarked(!isBookmarked);
         if (isBookmarked === true) {
-          dispatch(deletebookmark());
+          const paramId = param.id;
+          dispatch(deletebookmark({uid, paramId}));
         } else {
           const paramId = param.id;
           dispatch(addbookmark({uid, paramId}));
@@ -47,10 +47,12 @@ const MovieDetail = () => {
   };
 
   useEffect(() => {
-    if (bookmark.includes(param.id)) {
+    const user = bookmark.find((item) => item.uid === uid);
+    const userBookmark = user?.bookmark;
+    if (userBookmark?.includes(param.id)) {
       setIsBookmarked(true);
     }
-  }, [bookmark, param]);
+  }, [bookmark, param, uid]);
 
   return (
     <div className="detail-container">
