@@ -20,11 +20,15 @@ const SignUp = () => {
     const password = passwordRef.current?.value;
     const confirmPassword = confirmpasswordRef.current?.value;
     const comparison = password?.trim() === confirmPassword?.trim();
+    // 여기 분리해보는게 좋을거같다.
     if (email === null) {
       setInput("⚠️ 이메일 형식을 확인해주세요.");
-    } else if (!comparison) {
+      return;
+    }
+    if (!comparison) {
       setInput("⚠️ 입력하신 두개의 비밀번호가 일치하지 않습니다.");
-    } else if (comparison) {
+      return;
+    } else {
       emailSignUp(email, password)
         .then(() => {
           navigate("/signin");

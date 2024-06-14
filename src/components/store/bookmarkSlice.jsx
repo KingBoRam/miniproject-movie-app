@@ -4,8 +4,13 @@ const bookmarkSlice = createSlice({
   name: "bookmark",
   initialState: [],
   reducers: {
-    addbookmark: (state, action) => {
+    addUser: (state, action) => {
       state.push(action.payload);
+    },
+    addbookmark: (state, action) => {
+      const {uid, paramId} = action.payload;
+      const obj = state.find((item) => item.uid === uid);
+      obj.bookmark.push(paramId);
     },
     deletebookmark: (state, action) => {
       return state.filter((item) => {
@@ -15,6 +20,6 @@ const bookmarkSlice = createSlice({
   },
 });
 
-export const {addbookmark, deletebookmark} = bookmarkSlice.actions;
+export const {addUser, addbookmark, deletebookmark} = bookmarkSlice.actions;
 
 export const bookmarkReducer = bookmarkSlice.reducer;

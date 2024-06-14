@@ -11,9 +11,11 @@ import {getUserInfo} from "../../../firebase";
 const MovieDetail = () => {
   const [movieDetail, setMovieDetail] = useState({});
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const [uid, setUid] = useState(null);
   const bookmark = useSelector((state) => {
     return state.bookmark;
   });
+  console.log(bookmark);
   const dispatch = useDispatch();
   const param = useParams();
 
@@ -22,6 +24,12 @@ const MovieDetail = () => {
     axios.get(`/movie/${param.id}`).then((res) => setMovieDetail(res.data));
   }, [param]);
 
+  useEffect(() => {
+    getUserInfo((user) => {
+      setUid(user.uid);
+    });
+  });
+
   const handleBookmarkClick = () => {
     getUserInfo((user) => {
       if (!user) {
@@ -29,9 +37,10 @@ const MovieDetail = () => {
       } else {
         setIsBookmarked(!isBookmarked);
         if (isBookmarked === true) {
-          dispatch(deletebookmark(param.id));
+          dispatch(deletebookmark());
         } else {
-          dispatch(addbookmark(param.id));
+          const paramId = param.id;
+          dispatch(addbookmark({uid, paramId}));
         }
       }
     });

@@ -5,10 +5,27 @@ import Row from "../common/Row";
 import {FaArrowAltCircleUp} from "react-icons/fa";
 import {GoTriangleDown} from "react-icons/go";
 import "./Home.css";
+import {useDispatch, useSelector} from "react-redux";
+import {getUserInfo} from "../../../firebase";
+import {addUser} from "../store/bookmarkSlice";
 
 const Home = () => {
   const [movieList, setMovieList] = useState([]);
   const [page, setPage] = useState(1);
+  const bookmark = useSelector((state) => state.bookmark);
+  console.log(bookmark);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getUserInfo((user) => {
+      if (bookmark.find((ex) => ex.uid === user.uid)) {
+        return;
+      } else {
+        const uid = user.uid;
+        dispatch(addUser({uid, bookmark: []}));
+      }
+    });
+  }, [bookmark, dispatch]);
 
   const fetchMovies = useCallback(async (page) => {
     const res = await axios.get(`/movie/popular?page=${page}`);
