@@ -8,7 +8,11 @@ React와 Vite로 제작된 영화 웹사이트입니다. 사이트에 접속하�
 - **Swiper**: 슬라이드 구현을 위한 라이브러리
 - **Redux-persist**: 유저 북마크 정보를 스토리지에 저장하기 위한 라이브러리
 - **Firebase** : email-password 로그인과 구글 로그인, 현재 인증된 유저 정보와 로그아웃 기능을 위해 사용한 라이브러리
- 
+
+## 배포 도메인
+- **vercel** : https://miniproject-movie-app.vercel.app
+- **firebase** : https://themovies-a075b.web.app/
+
 ## 구현 후 회고
 
 - 블로그 링크 : [미니프로젝트 - Movie App](https://velog.io/@bory2321/%EB%AF%B8%EB%8B%88%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Movie-App)
