@@ -3,6 +3,7 @@ import "./SignUp.css";
 import {emailSignUp, getUserInfo} from "../../../firebase";
 import {useLocation, useNavigate} from "react-router-dom";
 import {validateEmail} from "../../utils/validateEmail";
+import {useSelector} from "react-redux";
 
 const SignUp = () => {
   const [input, setInput] = useState("");
@@ -10,7 +11,7 @@ const SignUp = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmpasswordRef = useRef(null);
-
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   const {pathname} = useLocation();
   const navigate = useNavigate();
 
@@ -61,7 +62,7 @@ const SignUp = () => {
         <input
           ref={nameRef}
           required
-          className="signup-input"
+          className={isDarkMode ? "singup-input-dark" : "signup-input"}
           type="text"
           name="name"
           id="name"></input>
@@ -73,7 +74,7 @@ const SignUp = () => {
         <input
           ref={emailRef}
           required
-          className="signup-input"
+          className={isDarkMode ? "singup-input-dark" : "signup-input"}
           type="email"
           name="email"
           id="email"></input>
@@ -85,7 +86,7 @@ const SignUp = () => {
         <input
           ref={passwordRef}
           required
-          className="signup-input"
+          className={isDarkMode ? "singup-input-dark" : "signup-input"}
           id="password"
           name="password"
           type="password"></input>
@@ -97,7 +98,7 @@ const SignUp = () => {
         <input
           ref={confirmpasswordRef}
           required
-          className="signup-input"
+          className={isDarkMode ? "singup-input-dark" : "signup-input"}
           type="password"
           name="email-comfirm"
           id="email-confirm"></input>

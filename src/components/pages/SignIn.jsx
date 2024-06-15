@@ -4,13 +4,15 @@ import {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {FcGoogle} from "react-icons/fc";
 import {validateEmail} from "../../utils/validateEmail";
+import {useSelector} from "react-redux";
 
 const SignIn = () => {
   const [input, setInput] = useState("");
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const navigate = useNavigate();
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   const {pathname} = useLocation();
+  const navigate = useNavigate();
 
   const handleSignin = (e) => {
     e.preventDefault();
@@ -55,12 +57,10 @@ const SignIn = () => {
     <form className="signin-form" onSubmit={handleSignin}>
       <div className="signin-text">방문을 환영합니다.</div>
       <div className="signin-container">
-        <label className="signin-label" htmlFor="email">
-          이메일 :
-        </label>
+        <label htmlFor="email">이메일 :</label>
         <input
           ref={emailRef}
-          className="signin-input"
+          className={isDarkMode ? "signin-dark-input" : "signin-input"}
           type="email"
           name="email"
           id="email"></input>
@@ -75,7 +75,7 @@ const SignIn = () => {
         </label>
         <input
           ref={passwordRef}
-          className="signin-input"
+          className={isDarkMode ? "signin-dark-input" : "signin-input"}
           type="password"></input>
       </div>
       <div className="signin-error-message">{input}</div>

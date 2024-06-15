@@ -3,17 +3,20 @@ import {persistStore, persistReducer} from "redux-persist";
 import storage from "redux-persist/lib/storage"; // 기본적으로 localStorage를 사용합니다.
 import {bookmarkReducer} from "./bookmarkSlice"; // bookmark 리듀서
 import {userNameReducer} from "./userNameSlice"; // userName 리듀서
+import themeSlice from "./themeSlice";
 
 // persist 설정
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["bookmark"], // bookmark 리듀서만 localStorage에 저장합니다.
+  // whitelist : localstorage에 저장할 reducer
+  whitelist: ["bookmark", "theme"],
 };
 
 const rootReducer = combineReducers({
   bookmark: bookmarkReducer,
   userName: userNameReducer,
+  theme: themeSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

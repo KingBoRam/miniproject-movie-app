@@ -26,7 +26,7 @@ main {
   position: fixed;
   right: 50px;
   bottom: 50px;
-  color: #1c7ed6;
+  color: var(--primaryColor);
   cursor: pointer;
   z-index: 9;
 }

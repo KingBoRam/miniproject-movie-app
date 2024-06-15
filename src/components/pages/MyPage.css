@@ -55,7 +55,7 @@
 .mypage-edit-btn {
   border: none;
   background-color: transparent;
-  color: rgb(225, 0, 0);
+  color: var(--secondaryColor);
   cursor: pointer;
 }
 

@@ -58,7 +58,7 @@ const MovieDetail = () => {
     <div className="detail-container">
       <BsFillBookmarkStarFill
         className="bookmark"
-        style={{color: isBookmarked ? "#e03131" : "black"}}
+        style={{color: isBookmarked ? "#e03131" : "#495057"}}
         onClick={handleBookmarkClick}
       />
       <img

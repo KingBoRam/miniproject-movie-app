@@ -1,8 +1,10 @@
 import {useNavigate} from "react-router-dom";
 import "./MovieCard.css";
 import {GoStarFill} from "react-icons/go";
+import {useSelector} from "react-redux";
 
 const MovieCard = (item) => {
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -26,7 +28,7 @@ const MovieCard = (item) => {
       </p>
       <div className="card-poster-2">
         <GoStarFill className="card-icon" />
-        <p className="card-vote_average">
+        <p className={isDarkMode ? "card-vote-dark" : "card-vote_average"}>
           {(Math.round(item.vote_average * 10) / 10).toFixed(1)}
         </p>
       </div>

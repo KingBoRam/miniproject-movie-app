@@ -37,7 +37,7 @@
   font-size: 1.5rem;
   padding: 10px 30px;
   border-radius: 20px;
-  background-color: #1c7ed6;
+  background-color: var(--primaryColor);
   color: white;
   border: none;
   font-weight: 900;
@@ -89,4 +89,15 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.singup-input-dark {
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(216, 216, 216);
+  outline: none;
+  margin-left: 5px;
+  font-size: 1rem;
+  color: white;
 }

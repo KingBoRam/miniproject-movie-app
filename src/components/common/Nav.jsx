@@ -7,14 +7,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {setUserName} from "../store/userNameSlice";
 import {getUserInfo, userSignOut} from "../../../firebase";
 
+import {CiLight, CiDark} from "react-icons/ci";
+import {toggleTheme} from "../store/themeSlice";
+
 const Nav = () => {
   const [value, setValue] = useState("");
   const [user, setUser] = useState("");
+  const [loginState, setLoginState] = useState("");
   const userName = useSelector((state) => {
     return state.userName;
   });
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   const dispatch = useDispatch();
-  const [loginState, setLoginState] = useState("");
   const navigate = useNavigate();
 
   const handleChange = async (e) => {
@@ -37,26 +41,35 @@ const Nav = () => {
     userSignOut();
   };
 
+  const handleThemeChange = () => {
+    dispatch(toggleTheme("dark"));
+  };
+
+  useEffect(() => {
+    document.body.className = isDarkMode ? "dark-mode" : "light-mode";
+  }, [isDarkMode]);
+
   return (
-    <div className="nav-container">
+    <div className={`nav-container ${isDarkMode ? "dark-nav" : "light-nav"}`}>
       <div
         className="nav-logo-container"
         onClick={() => {
-          // window.location.replace("/");
           navigate("/");
         }}>
         <MdLocalMovies className="nav-logo" />{" "}
         <div className="nav-logo-text">The movies</div>
       </div>
-      <div className="nav-search-container">
+      <div
+        className={`${isDarkMode ? "dark-input-container" : "nav-search-container"}`}>
         <input
+          className={`${isDarkMode ? "dark-input" : "nav-search-input"}`}
           type="text"
-          placeholder=" 찾고 싶은 영화를 검색해주세요"
-          className="nav-search-input"
+          placeholder=" 찾고 싶은 영화를 검색해주세요."
           value={value}
           onChange={(e) => handleChange(e)}
         />
       </div>
+
       <div className="nav-button-container">
         {loginState ? (
           <div className="nav-user">
@@ -103,6 +116,11 @@ const Nav = () => {
               로그인
             </button>
           </>
+        )}
+        {!isDarkMode ? (
+          <CiDark className="theme-icon" onClick={handleThemeChange} />
+        ) : (
+          <CiLight className="theme-icon" onClick={handleThemeChange}></CiLight>
         )}
       </div>
     </div>

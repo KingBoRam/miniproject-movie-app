@@ -9,13 +9,11 @@
   left: 0;
   top: 0;
   z-index: 9;
-  border-bottom: 1px solid rgb(237, 237, 237);
-  background-color: white;
 }
 
 .nav-logo {
   font-size: 5rem;
-  color: #1c7ed6;
+  color: var(--primaryColor);
 }
 
 .nav-logo-text {
@@ -25,6 +23,8 @@
 }
 
 .nav-button-container {
+  display: flex;
+  align-items: center;
   min-width: 127px;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .nav-button:hover {
-  color: #1c7ed6;
+  color: var(--primaryColor);
 }
 
 .nav-logo-container {
@@ -90,7 +90,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #1c7ed6;
+  background-color: var(--primaryColor);
   color: white;
   display: flex;
   justify-content: center;
@@ -109,12 +109,11 @@
 }
 
 .dropOut {
-  /* display: none; */
-  background-color: #e03131;
+  background-color: var(--secondaryColor);
   position: absolute;
   width: 110px;
-  top: 55px;
-  right: -17%;
+  top: 57px;
+  right: -33%;
   text-align: center;
   padding: 10px;
   z-index: 99;
@@ -128,7 +127,7 @@
   position: absolute;
   bottom: 78px;
   left: 47px;
-  border-right: 8px solid #e03131;
+  border-right: 8px solid var(--secondaryColor);
   border-top: 16px solid transparent;
 }
 
@@ -137,7 +136,7 @@
   position: absolute;
   bottom: 78px;
   right: 47px;
-  border-left: 8px solid #e03131;
+  border-left: 8px solid var(--secondaryColor);
   border-top: 16px solid transparent;
 }
 
@@ -172,4 +171,46 @@
   .dropOut {
     right: 10px;
   }
+}
+
+.dark-nav {
+  background-color: var(--mainBlack);
+  color: var(--mainWhite);
+  border-bottom: 1px solid rgb(53, 53, 53);
+}
+
+.light-nav {
+  background-color: var(--mainWhite);
+  color: var(--mainBlack);
+  border-bottom: 1px solid rgb(237, 237, 237);
+}
+
+.theme-icon {
+  font-size: 2.2rem;
+  margin-left: 1rem;
+}
+
+.dark-input-container {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 300px;
+  min-width: 157px;
+  height: 50%;
+  border: 1px solid rgb(76, 76, 76);
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark-input {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  margin: 1rem;
+  font-size: 0.9rem;
+  border: none;
+  outline: none;
+  background-color: unset;
+  color: white;
 }

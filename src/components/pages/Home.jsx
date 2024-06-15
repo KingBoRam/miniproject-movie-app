@@ -13,7 +13,6 @@ const Home = () => {
   const [movieList, setMovieList] = useState([]);
   const [page, setPage] = useState(1);
   const bookmark = useSelector((state) => state.bookmark);
-  console.log(bookmark);
   const dispatch = useDispatch();
 
   useEffect(() => {

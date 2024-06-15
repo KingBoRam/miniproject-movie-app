@@ -51,3 +51,7 @@
     height: 200px;
   }
 }
+
+.card-vote-dark {
+  color: var(--mainWhite);
+}
