@@ -14,9 +14,30 @@ import "swiper/css/navigation";
 // import required modules
 import {EffectCoverflow, Pagination, Navigation} from "swiper/modules";
 import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const Row = () => {
   const [topMovies, setTopMovies] = useState([]);
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
+
+  useEffect(() => {
+    const bulletSelectors = [
+      ".swiper-pagination-bullet-active-prev",
+      ".swiper-pagination-bullet-active-prev-prev",
+      ".swiper-pagination-bullet-active-next",
+      ".swiper-pagination-bullet-active-next-next",
+    ];
+    bulletSelectors.forEach((selector) => {
+      const element = document.querySelector(selector);
+      if (element) {
+        if (isDarkMode) {
+          element.classList.add("swiper-bullet-dark-mode");
+        } else {
+          element.classList.remove("swiper-bullet-dark-mode");
+        }
+      }
+    });
+  }, [isDarkMode]);
 
   useEffect(() => {
     axios

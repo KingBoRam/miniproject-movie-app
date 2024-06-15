@@ -36,3 +36,7 @@
     font-size: 30px !important;
   }
 }
+
+.swiper-bullet-dark-mode {
+  background-color: white !important;
+}
