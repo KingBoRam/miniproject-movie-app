@@ -1,9 +1,9 @@
 .detail-container {
   width: 1028px;
-  height: 70vh;
+  height: calc(80% - 80px); /* nav의 높이를 빼줌 */
   position: fixed;
   left: 50%;
-  top: 50%;
+  top: calc(50% + 40px); /* nav의 높이의 절반을 더해줌 */
   transform: translate(-50%, -50%);
   display: flex;
 }
@@ -25,6 +25,7 @@
   align-items: flex-start;
   padding: 1rem;
   animation: moveTop 1s linear;
+  position: relative;
 }
 
 .detail-description__title {
@@ -54,7 +55,7 @@
 
 .detail-description__overview {
   margin: 1rem;
-  width: 80%;
+  width: 100%;
   line-height: 1.5rem;
 }
 
@@ -64,11 +65,8 @@
 }
 
 .bookmark {
-  position: fixed;
+  margin: 1rem;
   font-size: 3rem;
-  right: 13px;
-  top: 20px;
-  z-index: 1000;
   cursor: pointer;
   animation: moveLeft 1s linear;
 }
@@ -110,8 +108,8 @@
   .detail-container {
     flex-direction: column;
     align-items: center;
-    width: 90%;
-    padding: 1rem;
+    width: 70%;
+    height: auto;
   }
   .detail-poster {
     width: 100%;
@@ -130,30 +128,6 @@
     margin: 10px;
   }
   .bookmark {
-    font-size: 3rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .detail-container {
-    width: 100%;
-    padding: 1rem;
-  }
-  .detail-description__title,
-  .detail-description__vote-average,
-  .detail-description__genres,
-  .detail-description__overview {
-    font-size: 1rem;
-    margin: 5px;
-  }
-  .detail-description__overview {
-    width: 100%;
-  }
-  .detail-description__genre {
-    padding: 2px 12px;
-    font-size: 15px;
-  }
-  .bookmark {
-    font-size: 2rem; /* Adjusted for smaller screens */
+    font-size: 2.5rem;
   }
 }

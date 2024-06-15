@@ -21,20 +21,21 @@
 
 .card-title {
   padding: 3px;
-  height: 30px;
+  margin-bottom: 2px;
+  height: 20px;
   align-self: flex-start;
   overflow: hidden;
 }
 
 .card-vote_average {
-  height: 30px;
+  height: 20px;
   padding-right: 3px;
   padding-left: 3px;
   align-self: self-end;
   color: rgba(26, 26, 26, 0.544);
 }
 
-.card-poster-2 {
+.card-information {
   display: flex;
   justify-content: end;
 }

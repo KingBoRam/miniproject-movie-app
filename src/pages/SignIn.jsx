@@ -1,10 +1,14 @@
 import "./SignIn.css";
-import {emailSignIn, getUserInfo, googleSignIn} from "../../firebase";
 import {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import {FcGoogle} from "react-icons/fc";
-import {validateEmail} from "../utils/validateEmail";
 import {useSelector} from "react-redux";
+import {
+  emailSignInToFirebase,
+  getUserInfoToFirebase,
+  googleSignInToFirebase,
+} from "../../firebase";
+import {validateEmail} from "../utils/validateEmail";
+import {FcGoogle} from "react-icons/fc";
 
 const SignIn = () => {
   const [input, setInput] = useState("");
@@ -14,11 +18,11 @@ const SignIn = () => {
   const {pathname} = useLocation();
   const navigate = useNavigate();
 
-  const handleSignin = (e) => {
+  const emailPasswordSignin = (e) => {
     e.preventDefault();
     const email = validateEmail(emailRef.current.value);
     const password = passwordRef.current.value;
-    emailSignIn(email, password)
+    emailSignInToFirebase(email, password)
       .then(() => {
         navigate("/");
       })
@@ -34,9 +38,9 @@ const SignIn = () => {
       });
   };
 
-  const handleGoogleSignin = (e) => {
+  const googleOAuthSignin = (e) => {
     e.preventDefault();
-    googleSignIn().catch((error) => {
+    googleSignInToFirebase().catch((error) => {
       if (error.length > 0) {
         setInput("⚠️ 구글을 통한 로그인에 실패했습니다.");
       }
@@ -44,7 +48,7 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    getUserInfo((user) => {
+    getUserInfoToFirebase((user) => {
       if (user) {
         if (pathname === "/signin") {
           navigate("/");
@@ -54,7 +58,7 @@ const SignIn = () => {
   }, [navigate, pathname]);
 
   return (
-    <form className="signin-form" onSubmit={handleSignin}>
+    <form className="signin-form" onSubmit={emailPasswordSignin}>
       <div className="signin-text">방문을 환영합니다.</div>
       <div className="signin-container">
         <label htmlFor="email">이메일 :</label>
@@ -82,7 +86,7 @@ const SignIn = () => {
       <button className="signin-button" type="submit">
         이메일 로그인
       </button>
-      <button className="signin-button" onClick={handleGoogleSignin}>
+      <button className="signin-button" onClick={googleOAuthSignin}>
         <FcGoogle className="google-logo" /> 구글 로그인
       </button>
     </form>

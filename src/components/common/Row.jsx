@@ -1,16 +1,15 @@
-import {useEffect, useState} from "react";
 import "./Row.css";
+import {useEffect, useState} from "react";
 import axios from "../../api/axios";
+
 // import Swiper core and required modules
 import {Swiper, SwiperSlide} from "swiper/react";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "./swipe.css";
 import "swiper/css/navigation";
-
 // import required modules
 import {EffectCoverflow, Pagination, Navigation} from "swiper/modules";
 import {useNavigate} from "react-router-dom";

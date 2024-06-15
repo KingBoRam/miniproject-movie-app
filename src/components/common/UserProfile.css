@@ -1,0 +1,74 @@
+.userProfile-container {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  padding: 5rem;
+  border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.userProfile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.userProfile-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.userProfile-name-container {
+  position: relative;
+}
+
+.userProfile-name {
+  padding: 1rem;
+}
+
+.userProfile-edit-btn {
+  border: none;
+  background-color: transparent;
+  color: var(--secondaryColor);
+  cursor: pointer;
+}
+
+.userProfile-edit {
+  padding-left: 1rem;
+}
+
+.userProfile-edit-input {
+  border: none;
+  border-bottom: 1px solid rgb(183, 183, 183);
+  outline: none;
+}
+
+.nickname {
+  width: 100%;
+  position: absolute;
+  bottom: 23px;
+  right: -75%;
+}
+
+.profile-edit-btn {
+  padding-left: 15px;
+}
+
+.userProfile-email {
+  padding: 1rem;
+}
+
+@media screen and (max-width: 1008px) {
+  .userProfile-img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .userProfile-container {
+    gap: 2rem;
+  }
+}

@@ -1,9 +1,9 @@
-import {useEffect, useRef, useState} from "react";
 import "./SignUp.css";
-import {emailSignUp, getUserInfo} from "../../firebase";
+import {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import {validateEmail} from "../utils/validateEmail";
 import {useSelector} from "react-redux";
+import {emailSignUpToFirebase, getUserInfoToFirebase} from "../../firebase";
+import {validateEmail} from "../utils/validateEmail";
 
 const SignUp = () => {
   const [input, setInput] = useState("");
@@ -15,7 +15,7 @@ const SignUp = () => {
   const {pathname} = useLocation();
   const navigate = useNavigate();
 
-  const handleSignup = (e) => {
+  const emailPasswordSignup = (e) => {
     e.preventDefault();
     const email = validateEmail(emailRef.current?.value);
     const password = passwordRef.current?.value;
@@ -30,7 +30,7 @@ const SignUp = () => {
       setInput("⚠️ 입력하신 두개의 비밀번호가 일치하지 않습니다.");
       return;
     } else {
-      emailSignUp(email, password)
+      emailSignUpToFirebase(email, password)
         .then(() => {
           navigate("/signin");
         })
@@ -43,7 +43,7 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    getUserInfo((user) => {
+    getUserInfoToFirebase((user) => {
       if (user) {
         if (pathname === "/signup") {
           navigate("/");
@@ -53,7 +53,7 @@ const SignUp = () => {
   }, [navigate, pathname]);
 
   return (
-    <form className="signup-form" onSubmit={handleSignup}>
+    <form className="signup-form" onSubmit={emailPasswordSignup}>
       <div className="signup-text">가입을 환영합니다.</div>
       <div className="signup-container">
         <label className="signup-label" htmlFor="name">

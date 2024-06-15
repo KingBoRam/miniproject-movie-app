@@ -1,19 +1,19 @@
 import "./Nav.css";
 import {useNavigate} from "react-router-dom";
-import {MdLocalMovies} from "react-icons/md";
 import {useEffect, useState} from "react";
-import {LuUser2} from "react-icons/lu";
 import {useDispatch, useSelector} from "react-redux";
+import {getUserInfoToFirebase, userSignOutToFirebase} from "../../../firebase";
 import {setUserName} from "../store/userNameSlice";
-import {getUserInfo, userSignOut} from "../../../firebase";
-
-import {CiLight, CiDark} from "react-icons/ci";
 import {toggleTheme} from "../store/themeSlice";
+import {LuUser2} from "react-icons/lu";
+import {CiLight} from "react-icons/ci";
+import {MdDarkMode} from "react-icons/md";
+import {MdLocalMovies} from "react-icons/md";
 
 const Nav = () => {
-  const [value, setValue] = useState("");
-  const [user, setUser] = useState("");
-  const [loginState, setLoginState] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentUser, setCurrentUser] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState("");
   const userName = useSelector((state) => {
     return state.userName;
   });
@@ -21,27 +21,27 @@ const Nav = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleChange = async (e) => {
-    setValue(e.target.value);
+  const handleSearchChange = async (e) => {
+    setSearchQuery(e.target.value);
     navigate(`/search?q=${e.target.value}`);
   };
 
   useEffect(() => {
-    getUserInfo((user) => {
+    getUserInfoToFirebase((user) => {
       if (user) {
-        setLoginState(true);
-        setUser(user);
-        const asd = user.displayName || user.email;
-        dispatch(setUserName(asd));
+        setIsLoggedIn(true);
+        setCurrentUser(user);
+        const displayNameOrEmail = user.displayName || user.email;
+        dispatch(setUserName(displayNameOrEmail));
       }
     });
   }, [dispatch]);
 
-  const handleSignout = () => {
-    userSignOut();
+  const handleSignOut = () => {
+    userSignOutToFirebase();
   };
 
-  const handleThemeChange = () => {
+  const handleThemeToggle = () => {
     dispatch(toggleTheme("dark"));
   };
 
@@ -65,18 +65,17 @@ const Nav = () => {
           className={`${isDarkMode ? "dark-input" : "nav-search-input"}`}
           type="text"
           placeholder=" 찾고 싶은 영화를 검색해주세요."
-          value={value}
-          onChange={(e) => handleChange(e)}
+          value={searchQuery}
+          onChange={(e) => handleSearchChange(e)}
         />
       </div>
-
       <div className="nav-button-container">
-        {loginState ? (
+        {isLoggedIn ? (
           <div className="nav-user">
             <p className="nav-user-name">{userName}님</p>
-            {user.photoURL !== null ? (
+            {currentUser.photoURL !== null ? (
               <img
-                src={user.photoURL}
+                src={currentUser.photoURL}
                 alt="user img"
                 className="nav-user-image"
               />
@@ -86,7 +85,7 @@ const Nav = () => {
               </div>
             )}
             <div className="dropOut">
-              <button className="nav-button-dropout" onClick={handleSignout}>
+              <button className="nav-button-dropout" onClick={handleSignOut}>
                 로그아웃
               </button>
               <button
@@ -118,9 +117,9 @@ const Nav = () => {
           </>
         )}
         {!isDarkMode ? (
-          <CiDark className="theme-icon" onClick={handleThemeChange} />
+          <MdDarkMode className="theme-icon" onClick={handleThemeToggle} />
         ) : (
-          <CiLight className="theme-icon" onClick={handleThemeChange}></CiLight>
+          <CiLight className="theme-icon" onClick={handleThemeToggle}></CiLight>
         )}
       </div>
     </div>

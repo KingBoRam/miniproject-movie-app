@@ -22,28 +22,28 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-export const getUserInfo = (callback) => {
+export const getUserInfoToFirebase = (callback) => {
   onAuthStateChanged(auth, callback);
 };
 
-export const updateUserProfile = (editInfo) => {
+export const updateUserProfileToFirebase = (editInfo) => {
   return updateProfile(auth.currentUser, editInfo);
 };
 
-export const emailSignUp = (email, password) => {
+export const emailSignUpToFirebase = (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const emailSignIn = (email, password) => {
+export const emailSignInToFirebase = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
-export const googleSignIn = () => {
+export const googleSignInToFirebase = () => {
   const provider = new GoogleAuthProvider();
   return signInWithPopup(auth, provider);
 };
 
-export const userSignOut = () => {
+export const userSignOutToFirebase = () => {
   signOut(auth)
     .then(() => {
       window.location.replace("/");

@@ -1,12 +1,12 @@
-import {useEffect, useState} from "react";
 import "./MovieDetail.css";
+import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {addbookmark, deletebookmark} from "../store/bookmarkSlice";
+import {getUserInfoToFirebase} from "../../../firebase";
 import axios from "../../api/axios";
 import {GoStarFill} from "react-icons/go";
 import {BsFillBookmarkStarFill} from "react-icons/bs";
-import {useDispatch, useSelector} from "react-redux";
-import {addbookmark, deletebookmark} from "../store/bookmarkSlice";
-import {getUserInfo} from "../../../firebase";
 
 const MovieDetail = () => {
   const [movieDetail, setMovieDetail] = useState({});
@@ -24,13 +24,13 @@ const MovieDetail = () => {
   }, [param]);
 
   useEffect(() => {
-    getUserInfo((user) => {
+    getUserInfoToFirebase((user) => {
       setUid(user.uid);
     });
   });
 
   const handleBookmarkClick = () => {
-    getUserInfo((user) => {
+    getUserInfoToFirebase((user) => {
       if (!user) {
         alert("로그인이 필요한 기능입니다.");
       } else {
@@ -56,21 +56,21 @@ const MovieDetail = () => {
 
   return (
     <div className="detail-container">
-      <BsFillBookmarkStarFill
-        className="bookmark"
-        style={{color: isBookmarked ? "#e03131" : "#495057"}}
-        onClick={handleBookmarkClick}
-      />
       <img
         className="detail-poster"
         src={
-          movieDetail.backdrop_path === null ||
-          movieDetail.backdrop_path === "" ||
-          movieDetail.backdrop_path === undefined
-            ? "/images/blue.png"
-            : `https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`
+          movieDetail.backdrop_path !== null ||
+          movieDetail.backdrop_path !== "" ||
+          movieDetail.backdrop_path !== undefined
+            ? `https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`
+            : "/images/blue.png"
         }></img>
       <div className="detail-description">
+        <BsFillBookmarkStarFill
+          className="bookmark"
+          style={{color: isBookmarked ? "#e03131" : "#495057"}}
+          onClick={handleBookmarkClick}
+        />
         <h1 className="detail-description__title">{movieDetail.title}</h1>
         <p className="detail-description__vote-average">
           <GoStarFill className="detail-icon" />
