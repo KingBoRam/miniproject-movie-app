@@ -176,7 +176,7 @@
 .dark-nav {
   background-color: var(--mainBlack);
   color: var(--mainWhite);
-  border-bottom: 1px solid rgb(53, 53, 53);
+  /* border-bottom: 1px solid rgb(53, 53, 53); */
 }
 
 .light-nav {

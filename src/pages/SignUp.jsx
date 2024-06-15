@@ -1,8 +1,8 @@
 import {useEffect, useRef, useState} from "react";
 import "./SignUp.css";
-import {emailSignUp, getUserInfo} from "../../../firebase";
+import {emailSignUp, getUserInfo} from "../../firebase";
 import {useLocation, useNavigate} from "react-router-dom";
-import {validateEmail} from "../../utils/validateEmail";
+import {validateEmail} from "../utils/validateEmail";
 import {useSelector} from "react-redux";
 
 const SignUp = () => {

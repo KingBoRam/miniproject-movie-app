@@ -1,13 +1,13 @@
 import {useCallback, useEffect, useState} from "react";
-import MovieCard from "../movies/MovieCard";
-import axios from "../../api/axios";
-import Row from "../common/Row";
+import MovieCard from "../components/movies/MovieCard";
+import axios from "../api/axios";
+import Row from "../components/common/Row";
 import {FaArrowAltCircleUp} from "react-icons/fa";
 import {GoTriangleDown} from "react-icons/go";
 import "./Home.css";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserInfo} from "../../../firebase";
-import {addUser} from "../store/bookmarkSlice";
+import {getUserInfo} from "../../firebase";
+import {addUser} from "../components/store/bookmarkSlice";
 
 const Home = () => {
   const [movieList, setMovieList] = useState([]);
@@ -16,10 +16,10 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getUserInfo((user) => {
-      if (bookmark.find((ex) => ex.uid === user.uid)) {
+    -getUserInfo((user) => {
+      if (user && bookmark.find((ex) => ex.uid === user.uid)) {
         return;
-      } else {
+      } else if (user) {
         const uid = user.uid;
         dispatch(addUser({uid, bookmark: []}));
       }

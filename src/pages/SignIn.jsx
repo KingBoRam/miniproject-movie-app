@@ -1,9 +1,9 @@
 import "./SignIn.css";
-import {emailSignIn, getUserInfo, googleSignIn} from "../../../firebase";
+import {emailSignIn, getUserInfo, googleSignIn} from "../../firebase";
 import {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {FcGoogle} from "react-icons/fc";
-import {validateEmail} from "../../utils/validateEmail";
+import {validateEmail} from "../utils/validateEmail";
 import {useSelector} from "react-redux";
 
 const SignIn = () => {

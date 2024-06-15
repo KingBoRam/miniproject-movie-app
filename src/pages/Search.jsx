@@ -1,9 +1,9 @@
 import "./Search.css";
-import axios from "../../api/axios";
+import axios from "../api/axios";
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import MovieCard from "../movies/MovieCard";
-import {useDebounce} from "../../hooks/useDebounce";
+import MovieCard from "../components/movies/MovieCard";
+import {useDebounce} from "../hooks/useDebounce";
 
 const Search = () => {
   const [movieList, setMovieList] = useState([]);

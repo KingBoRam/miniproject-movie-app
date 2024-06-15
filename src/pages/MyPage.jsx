@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import "./MyPage.css";
 import {useNavigate} from "react-router-dom";
-import MovieCard from "../movies/MovieCard";
+import MovieCard from "../components/movies/MovieCard";
 import {useDispatch, useSelector} from "react-redux";
-import axios from "../../api/axios";
-import {setUserName} from "../store/userNameSlice";
-import {getUserInfo, updateUserProfile} from "../../../firebase";
+import axios from "../api/axios";
+import {setUserName} from "../components/store/userNameSlice";
+import {getUserInfo, updateUserProfile} from "../../firebase";
 
 const MyPage = () => {
   const [name, setName] = useState(null);
