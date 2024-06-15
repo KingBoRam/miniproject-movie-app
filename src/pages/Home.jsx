@@ -13,6 +13,7 @@ const Home = () => {
   const [movieList, setMovieList] = useState([]);
   const [page, setPage] = useState(1);
   const bookmark = useSelector((state) => state.bookmark);
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const Home = () => {
     <>
       <div className="container">
         <Row></Row>
-        <div className="btn-container">
+        <div className={isDarkMode ? "btn-container-dark" : "btn-container"}>
           <FaArrowAltCircleUp className="main-up-btn" onClick={handleClick} />
         </div>
         <div className="main-text">

@@ -28,7 +28,6 @@ const SignUp = () => {
     }
     if (!comparison) {
       setInput("⚠️ 입력하신 두개의 비밀번호가 일치하지 않습니다.");
-      return;
     } else {
       emailSignUpToFirebase(email, password)
         .then(() => {

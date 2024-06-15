@@ -41,6 +41,16 @@ main {
   border-radius: 2rem;
 }
 
+.btn-container-dark {
+  width: 3.7rem;
+  height: 3.7rem;
+  background-color: var(--mainBlack);
+  position: fixed;
+  right: 52px;
+  bottom: 52px;
+  border-radius: 2rem;
+}
+
 @media screen and (max-width: 1008px) {
   .main-up-btn {
     right: 10px;
