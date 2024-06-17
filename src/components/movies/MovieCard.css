@@ -46,6 +46,10 @@
   color: rgba(26, 26, 26, 0.544);
 }
 
+.card-vote-dark {
+  color: var(--mainWhite);
+}
+
 .card-information {
   display: flex;
   justify-content: end;
@@ -60,10 +64,8 @@
     width: 130px;
   }
   .card-poster {
-    height: 200px;
+    height: 180px;
   }
 }
-
-.card-vote-dark {
-  color: var(--mainWhite);
+@media screen and (max-width: 460px) {
 }

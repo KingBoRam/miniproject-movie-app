@@ -2,8 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10rem;
   width: 100%;
+  padding: 0 10rem;
   height: 80px;
   position: sticky;
   left: 0;
@@ -24,8 +24,8 @@
 
 .nav-button-container {
   display: flex;
+  justify-content: center;
   align-items: center;
-  min-width: 127px;
 }
 
 .nav-button {
@@ -73,7 +73,7 @@
 
 .nav-user {
   display: flex;
-  position: relative;
+  position: relative; /* Add this line */
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -112,7 +112,9 @@
   background-color: var(--secondaryColor);
   position: absolute;
   width: 110px;
-  top: 57px;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
   padding: 10px;
   z-index: 99;
@@ -125,7 +127,8 @@
   content: "";
   position: absolute;
   bottom: 78px;
-  left: 47px;
+  left: 52px;
+  transform: translateX(-50%);
   border-right: 8px solid var(--secondaryColor);
   border-top: 16px solid transparent;
 }
@@ -134,7 +137,7 @@
   content: "";
   position: absolute;
   bottom: 78px;
-  right: 47px;
+  right: 46px;
   border-left: 8px solid var(--secondaryColor);
   border-top: 16px solid transparent;
 }
@@ -157,25 +160,9 @@
   color: black;
 }
 
-@media screen and (max-width: 1008px) {
-  .nav-logo-text {
-    display: none;
-  }
-  .nav-container {
-    padding: 0 5px;
-  }
-  .nav-user-name {
-    display: none;
-  }
-  .dropOut {
-    right: 10px;
-  }
-}
-
 .dark-nav {
   background-color: var(--mainBlack);
   color: var(--mainWhite);
-  /* border-bottom: 1px solid rgb(53, 53, 53); */
 }
 
 .light-nav {
@@ -212,4 +199,31 @@
   outline: none;
   background-color: unset;
   color: white;
+}
+
+@media screen and (max-width: 1008px) {
+  .nav-logo-text {
+    display: none;
+  }
+  .nav-container {
+    padding: 0 2rem;
+  }
+  .nav-user-name {
+    display: none;
+  }
+  .dropOut {
+    right: -85%;
+  }
+  .nav-button-container {
+    margin-left: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .nav-container {
+    padding: 0 1rem;
+  }
+  .nav-button-container {
+    margin-left: 0.8rem;
+  }
 }

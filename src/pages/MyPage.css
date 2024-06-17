@@ -1,14 +1,32 @@
+.mypage-container {
+  width: 100%;
+  max-width: 1028px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: center;
+  padding: 10px;
+}
+
 .mypage-bookmark {
   width: 100%;
-  max-width: 1024px;
-  margin: 0 auto;
 }
 
 .mypage-bookmark-list {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .mypage-h2 {
   margin-top: 1rem;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1008px) {
+  .mypage-h2 {
+    margin-left: 1rem;
+  }
 }

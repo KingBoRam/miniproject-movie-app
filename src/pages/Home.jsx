@@ -69,7 +69,7 @@ const Home = () => {
         </div>
         <main>
           {movieList.map((item) => (
-            <MovieCard key={item.id} {...item} />
+            <MovieCard key={item.id} item={item} />
           ))}
         </main>
       </div>

@@ -29,6 +29,7 @@ const MovieDetail = () => {
       setUid(user.uid);
     });
   });
+  console.log(movieDetail);
 
   const handleBookmarkClick = () => {
     // https://gurtn.tistory.com/170
@@ -61,17 +62,13 @@ const MovieDetail = () => {
     }
   }, [bookmark, param, uid]);
 
+  const posterSrc = movieDetail.backdrop_path
+    ? `https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`
+    : "/images/blue.png";
+
   return (
     <div className="detail-container">
-      <img
-        className="detail-poster"
-        src={
-          movieDetail.backdrop_path !== null ||
-          movieDetail.backdrop_path !== "" ||
-          movieDetail.backdrop_path !== undefined
-            ? `https://image.tmdb.org/t/p/original/${movieDetail.backdrop_path}`
-            : "/images/blue.png"
-        }></img>
+      <img className="detail-poster" src={posterSrc}></img>
       <div className="detail-description">
         <BsFillBookmarkStarFill
           className={`bookmark ${vibration}`}

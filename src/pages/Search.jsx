@@ -39,7 +39,7 @@ const Search = () => {
         <div className="search-noresult">검색 결과가 없습니다.</div>
       ) : (
         movieList.map((item) => (
-          <MovieCard className="search-card" key={item.id} {...item} />
+          <MovieCard className="search-card" key={item.id} item={item} />
         ))
       )}
     </div>

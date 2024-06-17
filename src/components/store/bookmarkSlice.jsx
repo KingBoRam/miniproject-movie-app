@@ -19,10 +19,16 @@ const bookmarkSlice = createSlice({
         return item !== paramId;
       });
     },
+    changeBookmarkOrder: (state, action) => {
+      const {uid, newOrder} = action.payload;
+      const user = state.find((item) => item.uid === uid);
+      user.bookmark = newOrder;
+    },
   },
 });
 
-export const {addUser, addbookmark, deletebookmark} = bookmarkSlice.actions;
+export const {addUser, addbookmark, deletebookmark, changeBookmarkOrder} =
+  bookmarkSlice.actions;
 
 export const bookmarkReducer = bookmarkSlice.reducer;
 
