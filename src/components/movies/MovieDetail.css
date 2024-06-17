@@ -70,6 +70,10 @@
   cursor: pointer;
 }
 
+.bookmark.vibration {
+  animation: vibration 0.1s infinite;
+}
+
 @keyframes moveRight {
   from {
     opacity: 0;
@@ -103,6 +107,15 @@
   }
 }
 
+@keyframes vibration {
+  from {
+    transform: rotate(3deg);
+  }
+  to {
+    transform: rotate(-3deg);
+  }
+}
+
 @media screen and (max-width: 1008px) {
   .detail-container {
     flex-direction: column;
@@ -129,21 +142,4 @@
   .bookmark {
     font-size: 2.5rem;
   }
-}
-
-@keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  75% {
-    transform: translateX(5px);
-  }
-}
-
-.bookmark.shake {
-  animation: shake 1s;
 }

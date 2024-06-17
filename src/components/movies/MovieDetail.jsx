@@ -12,6 +12,7 @@ const MovieDetail = () => {
   const [movieDetail, setMovieDetail] = useState({});
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [uid, setUid] = useState(null);
+  const [vibration, setVibration] = useState("");
   const bookmark = useSelector((state) => {
     return state.bookmark;
   });
@@ -30,6 +31,11 @@ const MovieDetail = () => {
   });
 
   const handleBookmarkClick = () => {
+    setVibration("vibration");
+    setTimeout(() => {
+      setVibration("");
+    }, 400);
+
     getUserInfoToFirebase((user) => {
       if (!user) {
         alert("로그인이 필요한 기능입니다.");
@@ -67,7 +73,7 @@ const MovieDetail = () => {
         }></img>
       <div className="detail-description">
         <BsFillBookmarkStarFill
-          className="bookmark"
+          className={`bookmark ${vibration}`}
           style={{color: isBookmarked ? "#e03131" : "#495057"}}
           onClick={handleBookmarkClick}
         />

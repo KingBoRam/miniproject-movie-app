@@ -6,6 +6,8 @@ import {emailSignUpToFirebase, getUserInfoToFirebase} from "../../firebase";
 import {validateEmail} from "../utils/validateEmail";
 
 const SignUp = () => {
+  // dom을 직접 선택하는 useRef를 사용해도 되는가?!  https://react.dev/reference/react/useRef 공홈에 보면 렌더링 필요없을때
+  // 값을 참조해야할 때 쓰라고 되어있다! https://velog.io/@pon06188/useRef
   const [input, setInput] = useState("");
   const nameRef = useRef(null);
   const emailRef = useRef(null);
