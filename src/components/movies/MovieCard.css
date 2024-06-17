@@ -9,6 +9,17 @@
   transition: transform 0.2s linear;
 }
 
+.card-link {
+  text-decoration: none;
+  color: inherit; /* 부모 요소의 색상을 상속받음 */
+}
+
+/* 링크가 활성화되었을 때(클릭했을 때) 보라색폰트색이랑 밑줄 안생기도록*/
+.card-link:active {
+  text-decoration: none;
+  color: inherit;
+}
+
 .card:hover {
   transform: scale(0.9);
 }

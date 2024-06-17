@@ -34,7 +34,7 @@ const MyPage = () => {
       <UserProfile />
       <div className="mypage-content"></div>
       <div className="mypage-bookmark">
-        <h2>북마크</h2>
+        <h2 className="mypage-h2">북마크</h2>
         <div className="mypage-bookmark-list">
           {movieList.map((item) => (
             <MovieCard key={item.id} {...item} />

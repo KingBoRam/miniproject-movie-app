@@ -1,10 +1,14 @@
 .mypage-bookmark {
-  width: 80%;
+  width: 100%;
+  max-width: 1024px;
   margin: 0 auto;
-  margin-top: 2rem;
 }
 
 .mypage-bookmark-list {
   display: flex;
   flex-wrap: wrap;
+}
+
+.mypage-h2 {
+  margin-top: 1rem;
 }

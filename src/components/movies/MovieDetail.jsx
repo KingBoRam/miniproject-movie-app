@@ -31,6 +31,7 @@ const MovieDetail = () => {
   });
 
   const handleBookmarkClick = () => {
+    // https://gurtn.tistory.com/170
     setVibration("vibration");
     setTimeout(() => {
       setVibration("");

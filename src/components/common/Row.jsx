@@ -12,7 +12,7 @@ import "./swipe.css";
 import "swiper/css/navigation";
 // import required modules
 import {EffectCoverflow, Pagination, Navigation} from "swiper/modules";
-import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 // import {useSelector} from "react-redux";
 
 const Row = () => {
@@ -56,8 +56,6 @@ const Row = () => {
       .then((res) => setTopMovies(res.data.results));
   }, []);
 
-  const navigate = useNavigate();
-
   return (
     <div className="row-container">
       <Swiper
@@ -96,14 +94,13 @@ const Row = () => {
       >
         {topMovies.map((item) => (
           <SwiperSlide key={item.id}>
-            <img
-              className="row-img"
-              onClick={() => {
-                navigate(`/${item.id}`);
-              }}
-              alt={item.title}
-              src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-            />
+            <Link to={`/${item.id}`}>
+              <img
+                className="row-img"
+                alt={item.title}
+                src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+              />
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
