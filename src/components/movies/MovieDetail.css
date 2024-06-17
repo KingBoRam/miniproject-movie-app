@@ -68,7 +68,6 @@
   margin: 1rem;
   font-size: 3rem;
   cursor: pointer;
-  animation: moveLeft 1s linear;
 }
 
 @keyframes moveRight {
@@ -130,4 +129,21 @@
   .bookmark {
     font-size: 2.5rem;
   }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.bookmark.shake {
+  animation: shake 1s;
 }
