@@ -85,7 +85,7 @@ const MyPage = () => {
               className="mypage-trash-hover-area"
               onDragOver={(e) => e.preventDefault()}
               onDragEnter={(e) => dragEnter(e)}
-              onDrop={drop}></div>
+              onDragEnd={drop}></div>
           </div>
         </div>
         <div className="mypage-bookmark-list">
@@ -97,7 +97,7 @@ const MyPage = () => {
               onDragStart={(e) => dragStart(e, idx)}
               onDragOver={(e) => e.preventDefault()}
               onDragEnter={(e) => dragEnter(e, idx)}
-              onDrop={drop}
+              onDragEnd={drop}
             />
           ))}
         </div>
