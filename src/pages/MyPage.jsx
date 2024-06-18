@@ -5,11 +5,16 @@ import {getUserInfoToFirebase} from "../../firebase";
 import axios from "../api/axios";
 import MovieCard from "../components/movies/MovieCard";
 import UserProfile from "../components/common/UserProfile";
-import {changeBookmarkOrder} from "../components/store/bookmarkSlice";
+import {
+  changeBookmarkOrder,
+  deleteBookMark,
+} from "../components/store/bookmarkSlice";
+import {FaTrashCan} from "react-icons/fa6";
 
 const MyPage = () => {
   const [movieList, setMovieList] = useState([]);
   const [uid, setUid] = useState(null);
+  const [dragOverElement, setDragOverElement] = useState(null);
   const bookmark = useSelector((state) => state.bookmark);
   const dispatch = useDispatch();
 
@@ -32,29 +37,39 @@ const MyPage = () => {
     }
   }, [bookmark, uid]);
 
-  const dragItem = useRef();
-  const dragOverItem = useRef();
+  const dragItem = useRef(); // 드래그 시작 아이템
+  const dragOverItem = useRef(); // 드롭되기 전에 그 아래에 위치한 아이템
 
   const dragStart = (e, idx) => {
     dragItem.current = idx;
   };
 
   const dragEnter = (e, idx) => {
+    setDragOverElement(e.target); // 드래그된 요소를 저장
     dragOverItem.current = idx;
   };
 
   const drop = () => {
-    setMovieList([]);
-    const newList = [...movieList];
-    const dragItemValue = newList[dragItem.current];
-    newList.splice(dragItem.current, 1);
-    newList.splice(dragOverItem.current, 0, dragItemValue);
-    dragItem.current = null;
-    dragOverItem.current = null;
-    setMovieList(newList);
-    // Update the bookmark order in the store
-    const newOrder = newList.map((item) => item.id);
-    dispatch(changeBookmarkOrder({uid, newOrder}));
+    if (dragOverElement?.classList.contains("mypage-trash-hover-area")) {
+      // 휴지통 아이콘 위에 드롭된 경우
+      const newList = [...movieList];
+      newList.splice(dragItem.current, 1); // 해당 요소 제거
+      setMovieList(newList);
+      const newOrder = newList.map((item) => item.id);
+      dispatch(changeBookmarkOrder({uid, newOrder}));
+    } else {
+      // 일반적인 드래그 앤 드롭 처리
+      setMovieList([]);
+      const newList = [...movieList];
+      const dragItemValue = newList[dragItem.current];
+      newList.splice(dragItem.current, 1);
+      newList.splice(dragOverItem.current, 0, dragItemValue);
+      dragItem.current = null;
+      dragOverItem.current = null;
+      setMovieList(newList);
+      const newOrder = newList.map((item) => item.id);
+      dispatch(changeBookmarkOrder({uid, newOrder}));
+    }
   };
 
   return (
@@ -62,7 +77,17 @@ const MyPage = () => {
       <UserProfile />
       <div className="mypage-content"></div>
       <div className="mypage-bookmark">
-        <h2 className="mypage-h2">북마크</h2>
+        <div className="mypage-text-content">
+          <h2 className="mypage-h2">북마크</h2>
+          <div className="mypage-trash-wrapper">
+            <FaTrashCan className="mypage-trash" />
+            <div
+              className="mypage-trash-hover-area"
+              onDragOver={(e) => e.preventDefault()}
+              onDragEnter={(e) => dragEnter(e)}
+              onDrop={drop}></div>
+          </div>
+        </div>
         <div className="mypage-bookmark-list">
           {movieList.map((item, idx) => (
             <MovieCard
@@ -72,7 +97,7 @@ const MyPage = () => {
               onDragStart={(e) => dragStart(e, idx)}
               onDragOver={(e) => e.preventDefault()}
               onDragEnter={(e) => dragEnter(e, idx)}
-              onDragEnd={drop}
+              onDrop={drop}
             />
           ))}
         </div>

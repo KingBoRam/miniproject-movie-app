@@ -2,7 +2,7 @@ import "./MovieDetail.css";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {addbookmark, deletebookmark} from "../store/bookmarkSlice";
+import {addBookMark, deleteBookMark} from "../store/bookmarkSlice";
 import {getUserInfoToFirebase} from "../../../firebase";
 import axios from "../../api/axios";
 import {GoStarFill} from "react-icons/go";
@@ -45,10 +45,10 @@ const MovieDetail = () => {
         setIsBookmarked(!isBookmarked);
         if (isBookmarked === true) {
           const paramId = param.id;
-          dispatch(deletebookmark({uid, paramId}));
+          dispatch(deleteBookMark({uid, paramId}));
         } else {
           const paramId = param.id;
-          dispatch(addbookmark({uid, paramId}));
+          dispatch(addBookMark({uid, paramId}));
         }
       }
     });

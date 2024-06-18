@@ -20,9 +20,36 @@
   justify-content: center;
 }
 
+.mypage-text-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .mypage-h2 {
   margin-top: 1rem;
   margin-bottom: 10px;
+}
+
+.mypage-trash-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.mypage-trash {
+  font-size: 1.5rem;
+  color: var(--secondaryColor);
+}
+
+.mypage-trash-hover-area {
+  position: absolute;
+  /*부모 영역 보다 조금더 위로, 조금더 아래로 이동하다보면 감싸는 네모 형태가 된다.
+  부모 요소도 크기가 없고 크기는 오직 trashcan만 가지고 있으니까 결국 그 크기보다 10px씩 커지는 네모가 생김.*/
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: transparent;
 }
 
 @media screen and (max-width: 1008px) {
