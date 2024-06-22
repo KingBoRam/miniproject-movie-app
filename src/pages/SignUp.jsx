@@ -4,6 +4,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {emailSignUpToFirebase, getUserInfoToFirebase} from "../../firebase";
 import {validateEmail} from "../utils/validateEmail";
+import Logo from "../components/common/Logo";
 
 const SignUp = () => {
   // dom을 직접 선택하는 useRef를 사용해도 되는가?!  https://react.dev/reference/react/useRef 공홈에 보면 렌더링 필요없을때
@@ -55,7 +56,7 @@ const SignUp = () => {
 
   return (
     <form className="signup-form" onSubmit={emailPasswordSignup}>
-      <div className="signup-text">가입을 환영합니다.</div>
+      <Logo></Logo>
       <div className="signup-container">
         <label className="signup-label" htmlFor="name">
           이름 :

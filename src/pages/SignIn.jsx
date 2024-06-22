@@ -1,6 +1,6 @@
 import "./SignIn.css";
 import {useEffect, useRef, useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {
   emailSignInToFirebase,
@@ -9,6 +9,7 @@ import {
 } from "../../firebase";
 import {validateEmail} from "../utils/validateEmail";
 import {FcGoogle} from "react-icons/fc";
+import Logo from "../components/common/Logo";
 
 const SignIn = () => {
   const [input, setInput] = useState("");
@@ -59,7 +60,7 @@ const SignIn = () => {
 
   return (
     <form className="signin-form" onSubmit={emailPasswordSignin}>
-      <div className="signin-text">방문을 환영합니다.</div>
+      <Logo></Logo>
       <div className="signin-container">
         <label htmlFor="email">이메일 :</label>
         <input

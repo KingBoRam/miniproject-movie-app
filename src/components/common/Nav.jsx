@@ -102,7 +102,7 @@ const Nav = () => {
             <button
               className="nav-button"
               onClick={() => {
-                navigate("/signup");
+                navigate("/agree");
               }}>
               회원가입
             </button>

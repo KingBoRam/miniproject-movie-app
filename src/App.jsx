@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import MyPage from "./pages/MyPage";
+import Agree from "./pages/Agree";
 
 function App() {
   return (
@@ -14,11 +15,12 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/:id" element={<MovieDetail />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
         <Route path="/search" element={<Search />} />
         <Route path="/mypage" element={<MyPage />} />
       </Route>
+      <Route path="/agree" element={<Agree />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/signin" element={<SignIn />} />
     </Routes>
   );
 }

@@ -1,0 +1,6 @@
+.logo {
+  font-family: "Freesentation-9Black";
+  color: var(--primaryColor);
+  text-decoration: none;
+  margin-bottom: 3rem;
+}
