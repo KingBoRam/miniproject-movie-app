@@ -1,5 +1,5 @@
 .card {
-  width: 180px;
+  width: 350px;
   height: 100%;
   margin: 10px;
   display: flex;
@@ -7,6 +7,7 @@
   cursor: pointer;
   /* flex: 16%; */
   transition: transform 0.2s linear;
+  margin-bottom: 0.5rem;
 }
 
 .card-link {
@@ -20,22 +21,20 @@
   color: inherit;
 }
 
-.card:hover {
-  transform: scale(0.9);
-}
-
 .card-poster {
   width: 100%;
-  height: 230px;
-  border-radius: 5px;
+  height: 227px;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 .card-title {
   padding: 3px;
   margin-bottom: 2px;
-  height: 20px;
+  height: 1.6rem;
   align-self: flex-start;
   overflow: hidden;
+  font-size: 1.1rem;
 }
 
 .card-vote_average {
@@ -61,11 +60,30 @@
 
 @media screen and (max-width: 1008px) {
   .card {
-    width: 130px;
+    width: 280px;
+    height: 230px;
   }
-  .card-poster {
-    height: 180px;
+  .card-vote_average {
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    height: 1.7rem;
   }
 }
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 620px) {
+  .card {
+    width: 220px;
+    height: 190px;
+  }
+  .card-title {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 430px) {
+  .card {
+    width: 155px;
+  }
+  .card-title {
+    font-size: 1rem;
+  }
 }

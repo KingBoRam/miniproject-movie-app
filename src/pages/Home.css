@@ -1,6 +1,6 @@
 main {
   width: 100%;
-  max-width: 1028px;
+  max-width: 1328px;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -12,9 +12,9 @@ main {
 
 .main-text {
   text-align: start;
-  max-width: 1024px;
-  margin: 20px auto;
-  margin-bottom: 5px;
+  max-width: 1328px;
+  margin: 0 auto;
+  padding-left: 1rem;
   font-family: "Freesentation-9Black";
   font-size: 2rem;
   display: flex;
@@ -59,13 +59,23 @@ main {
   }
   .main-text {
     font-size: 1.5rem;
-    margin-left: 15px;
+    margin-left: 2rem;
   }
-  .btn-container {
+  .btn-container,
+  .btn-container-dark {
     width: 1.4rem;
     height: 1.4rem;
     border: 0.7rem;
     right: 11px;
     bottom: 11px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  main {
+    padding: 0;
+  }
+  .main-text {
+    margin-left: 1rem;
   }
 }

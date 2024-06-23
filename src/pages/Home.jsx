@@ -28,7 +28,9 @@ const Home = () => {
   }, [bookmark, dispatch]);
 
   const getMoiveDataTmdb = useCallback(async (page) => {
-    const res = await axios.get(`/movie/popular?page=${page}`);
+    const res = await axios.get(
+      `/movie/popular?page=${page}&include_video=true`
+    );
     setMovieList((prevMovies) => [...prevMovies, ...res.data.results]);
   }, []);
 
