@@ -1,9 +1,9 @@
 import "./MovieCard.css";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {GoStarFill} from "react-icons/go";
 import axios from "../../api/axios";
-import {useState, useEffect} from "react";
+import {useState} from "react";
 
 const MovieCard = ({
   item,
@@ -25,7 +25,7 @@ const MovieCard = ({
   const location = useLocation().pathname;
   const [hoverTimeout, setHoverTimeout] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
-  const navigate = useNavigate();
+  console.log(item);
 
   const cardPosterSrc = backdrop_path
     ? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
@@ -83,7 +83,6 @@ const MovieCard = ({
             onMouseLeave={handleMouseLeave}
           />
         )}
-
         <p className="card-title">{title || original_name || original_title}</p>
         <div className="card-information">
           <GoStarFill className="card-icon" />
@@ -91,6 +90,7 @@ const MovieCard = ({
             {(Math.round(vote_average * 10) / 10).toFixed(1)}
           </p>
         </div>
+        <div className="card-layer">asdf</div>
       </div>
     </Link>
   );

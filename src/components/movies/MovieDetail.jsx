@@ -75,6 +75,7 @@ const MovieDetail = () => {
           style={{color: isBookmarked ? "#e03131" : "#495057"}}
           onClick={handleBookmarkClick}
         />
+
         <h1 className="detail-description__title">{movieDetail.title}</h1>
         <p className="detail-description__vote-average">
           <GoStarFill className="detail-icon" />
