@@ -1,4 +1,5 @@
 import "./Nav.css";
+import {createPortal} from "react-dom";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,16 +13,14 @@ import {MdLocalMovies} from "react-icons/md";
 
 const Nav = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentUser, setCurrentUser] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState("");
-  const userName = useSelector((state) => {
-    return state.userName;
-  });
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const userName = useSelector((state) => state.userName);
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSearchChange = async (e) => {
+  const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     navigate(`/search?q=${e.target.value}`);
   };
@@ -49,7 +48,7 @@ const Nav = () => {
     document.body.className = isDarkMode ? "dark-mode" : "light-mode";
   }, [isDarkMode]);
 
-  return (
+  return createPortal(
     <div className={`nav-container ${isDarkMode ? "dark-nav" : "light-nav"}`}>
       <div
         className="nav-logo-container"
@@ -66,14 +65,14 @@ const Nav = () => {
           type="text"
           placeholder=" 찾고 싶은 영화를 검색해주세요."
           value={searchQuery}
-          onChange={(e) => handleSearchChange(e)}
+          onChange={handleSearchChange}
         />
       </div>
       <div className="nav-button-container">
         {isLoggedIn ? (
           <div className="nav-user">
             <p className="nav-user-name">{userName}님</p>
-            {currentUser.photoURL !== null ? (
+            {currentUser?.photoURL ? (
               <img
                 src={currentUser.photoURL}
                 alt="user img"
@@ -122,7 +121,8 @@ const Nav = () => {
           <CiLight className="theme-icon" onClick={handleThemeToggle}></CiLight>
         )}
       </div>
-    </div>
+    </div>,
+    document.getElementById("portal")
   );
 };
 
