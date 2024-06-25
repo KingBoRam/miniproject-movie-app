@@ -1,5 +1,4 @@
 import "./Nav.css";
-import {createPortal} from "react-dom";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -48,7 +47,7 @@ const Nav = () => {
     document.body.className = isDarkMode ? "dark-mode" : "light-mode";
   }, [isDarkMode]);
 
-  return createPortal(
+  return (
     <div className={`nav-container ${isDarkMode ? "dark-nav" : "light-nav"}`}>
       <div
         className="nav-logo-container"
@@ -121,8 +120,7 @@ const Nav = () => {
           <CiLight className="theme-icon" onClick={handleThemeToggle}></CiLight>
         )}
       </div>
-    </div>,
-    document.getElementById("portal")
+    </div>
   );
 };
 

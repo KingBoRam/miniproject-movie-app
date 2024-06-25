@@ -7,6 +7,7 @@ import {getUserInfoToFirebase} from "../../../firebase";
 import axios from "../../api/axios";
 import {GoStarFill} from "react-icons/go";
 import {BsFillBookmarkStarFill} from "react-icons/bs";
+import {GoTriangleDown} from "react-icons/go";
 
 const MovieDetail = () => {
   const [movieDetail, setMovieDetail] = useState({});
@@ -29,7 +30,6 @@ const MovieDetail = () => {
       setUid(user.uid);
     });
   });
-  console.log(movieDetail);
 
   const handleBookmarkClick = () => {
     // https://gurtn.tistory.com/170
@@ -68,29 +68,37 @@ const MovieDetail = () => {
 
   return (
     <div className="detail-container">
-      <img className="detail-poster" src={posterSrc}></img>
-      <div className="detail-description">
-        <BsFillBookmarkStarFill
-          className={`bookmark ${vibration}`}
-          style={{color: isBookmarked ? "#e03131" : "#495057"}}
-          onClick={handleBookmarkClick}
-        />
-
-        <h1 className="detail-description__title">{movieDetail.title}</h1>
-        <p className="detail-description__vote-average">
-          <GoStarFill className="detail-icon" />
-          {(Math.round(movieDetail.vote_average * 10) / 10).toFixed(1)}
-        </p>
-        <p className="detail-description__genres">
-          {movieDetail.genres?.map((genre) => {
-            return (
-              <span className="detail-description__genre" key={genre.id}>
-                {genre.name}
-              </span>
-            );
-          })}
-        </p>
-        <p className="detail-description__overview">{movieDetail.overview}</p>
+      <div className="detail-content">
+        <img className="detail-poster" src={posterSrc}></img>
+        <div className="detail-description">
+          <BsFillBookmarkStarFill
+            className={`bookmark ${vibration}`}
+            style={{color: isBookmarked ? "#e03131" : "#495057"}}
+            onClick={handleBookmarkClick}
+          />
+          <h1 className="detail-description__title">{movieDetail.title}</h1>
+          <p className="detail-description__vote-average">
+            <GoStarFill className="detail-icon" />
+            {(Math.round(movieDetail.vote_average * 10) / 10).toFixed(1)}
+          </p>
+          <p className="detail-description__genres">
+            {movieDetail.genres?.map((genre) => {
+              return (
+                <span className="detail-description__genre" key={genre.id}>
+                  {genre.name}
+                </span>
+              );
+            })}
+          </p>
+          <p className="detail-description__overview">{movieDetail.overview}</p>
+        </div>
+      </div>
+      <div className="detail-review">
+        <div className="detail-review-title">
+          <h2>한줄평</h2>{" "}
+          <GoTriangleDown className="detail-arrow"></GoTriangleDown>
+        </div>
+        <div></div>
       </div>
     </div>
   );

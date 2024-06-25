@@ -20,12 +20,13 @@ const MovieCard = ({
     original_title,
     backdrop_path,
     vote_average,
+    release_date,
+    original_language,
   } = item;
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   const location = useLocation().pathname;
   const [hoverTimeout, setHoverTimeout] = useState(null);
   const [videoUrl, setVideoUrl] = useState(null);
-  console.log(item);
 
   const cardPosterSrc = backdrop_path
     ? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
@@ -90,7 +91,9 @@ const MovieCard = ({
             {(Math.round(vote_average * 10) / 10).toFixed(1)}
           </p>
         </div>
-        <div className="card-layer">asdf</div>
+        {/* <div className="card-layer">
+          <p>개봉 날짜 : {release_date}</p>
+        </div> */}
       </div>
     </Link>
   );

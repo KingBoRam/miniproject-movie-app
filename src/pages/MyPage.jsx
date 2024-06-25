@@ -67,7 +67,8 @@ const MyPage = () => {
       dragItem.current = null;
       dragOverItem.current = null;
       setMovieList(newList);
-      const newOrder = newList.map((item) => item.id);
+      // 숫자로 저장이 되면서 드롭하고나면 디테일 페이지에서 숫자형을 못받아오고 있었다..
+      const newOrder = newList.map((item) => String(item.id));
       dispatch(changeBookmarkOrder({uid, newOrder}));
     }
   };

@@ -29,7 +29,6 @@ main {
   bottom: 50px;
   color: var(--primaryColor);
   cursor: pointer;
-  z-index: 9;
 }
 
 .btn-container {
@@ -40,6 +39,7 @@ main {
   right: 52px;
   bottom: 52px;
   border-radius: 2rem;
+  z-index: 99999;
 }
 
 .btn-container-dark {
