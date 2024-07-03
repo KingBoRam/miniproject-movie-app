@@ -55,7 +55,7 @@ const MyPage = () => {
       const newList = [...movieList];
       newList.splice(dragItem.current, 1); // 해당 요소 제거
       setMovieList(newList);
-      const newOrder = newList.map((item) => item.id);
+      const newOrder = newList.map((item) => String(item.id));
       dispatch(changeBookmarkOrder({uid, newOrder}));
     } else {
       // 일반적인 드래그 앤 드롭 처리

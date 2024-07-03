@@ -73,3 +73,13 @@
     gap: 2rem;
   }
 }
+
+@media screen and (max-width: 460px) {
+  .userProfile-img {
+    width: 140px;
+    height: 140px;
+  }
+  .userProfile-container {
+    padding: 2rem;
+  }
+}
